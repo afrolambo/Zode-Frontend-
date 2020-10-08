@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Switch, withRouter } from 'react-router-dom'
 import Welcome from './containers/Welcome';
 import Login from './components/Login';
 import Signup from './components/Signup'
+import {fetchSigns} from './actions/fetchSigns'
 import './CSS/App.css';
 
 class App extends React.Component {
@@ -62,7 +63,13 @@ class App extends React.Component {
     this.props.history.push("/login")
     this.setState({ user: null })
   }
+
+  handleOnClick() {
+    this.props.fetchSigns()
+  }
+
   render() {
+    const signs = this.props.signs.map(signs => <li key={signs.id}> {signs.name} </li>)
     return (
       <div>
         <NavBar user={this.state.user} clickHandler={this.logOutHandler} />
@@ -71,6 +78,8 @@ class App extends React.Component {
           <Route exact path="/login" render={() => <Login submitHandler={this.loginHandler} />} />
           <Route exact path="/signup" render={() => <Signup submitHandler={this.signupHandler}/>} />
         </Switch>
+        <button onClick={(e) => this.handleOnClick(e)} />
+        {signs}
       </div>
     )
   }
