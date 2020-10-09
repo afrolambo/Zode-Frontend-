@@ -1,13 +1,16 @@
-import React from 'react';
+import React, {Component} from 'react';
+
 import NavBar from './components/NavBar'
-import { BrowserRouter, Route, Switch, withRouter } from 'react-router-dom'
 import Welcome from './containers/Welcome';
 import Login from './components/Login';
 import Signup from './components/Signup'
-import {fetchSigns} from './actions/fetchSigns'
 import './CSS/App.css';
+import Zodiac from './containers/Zodiac'
+import Profile from './containers/Profile'
 
-class App extends React.Component {
+import { Route, Switch, withRouter } from 'react-router-dom'
+
+class App extends Component {
   state = {
     user: null
   }
@@ -64,22 +67,18 @@ class App extends React.Component {
     this.setState({ user: null })
   }
 
-  handleOnClick() {
-    this.props.fetchSigns()
-  }
 
   render() {
-    const signs = this.props.signs.map(signs => <li key={signs.id}> {signs.name} </li>)
     return (
       <div>
         <NavBar user={this.state.user} clickHandler={this.logOutHandler} />
         <Switch>
           <Route exact path="/" render={()=> <Welcome user={this.state.user} />}/>
+          <Route exact path="/Zodiac" component={Zodiac} />
+          <Route exact path="/profile" component={Profile} />
           <Route exact path="/login" render={() => <Login submitHandler={this.loginHandler} />} />
           <Route exact path="/signup" render={() => <Signup submitHandler={this.signupHandler}/>} />
         </Switch>
-        <button onClick={(e) => this.handleOnClick(e)} />
-        {signs}
       </div>
     )
   }
