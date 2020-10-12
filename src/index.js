@@ -2,22 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import './CSS/index.css';
+import { API_WS_ROOT } from './constants'
 
 //npm Tings ~
-import { BrowserRouter, Route } from 'react-router-dom'
-import { Provider } from 'react-redux'
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk'
-import rootReducer from './reducers/rootReducer'
-
-const store = createStore(rootReducer, applyMiddleware(thunk))
+import { ActionCableProvider } from 'react-actioncable-provider'
+import { BrowserRouter} from 'react-router-dom'
 
 ReactDOM.render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </Provider>,
+  
+    <ActionCableProvider url={API_WS_ROOT}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </ActionCableProvider>, 
   document.getElementById('root')
 );
 

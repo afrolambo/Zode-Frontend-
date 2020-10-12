@@ -6,16 +6,19 @@ import Login from './components/Login';
 import Signup from './components/Signup'
 import './CSS/App.css';
 import Zodiac from './containers/Zodiac'
-import Profile from './containers/Profile'
+import UserProfile from './containers/UserProfile'
+import Messages from './containers/Messages'
+import SearchAllUsers from './containers/SearchAllUsers'
 
 import { Route, Switch, withRouter } from 'react-router-dom'
+import { ModalActions } from 'semantic-ui-react';
 
 class App extends Component {
   state = {
     user: null
   }
 
-  componentDidMount(){
+  componentDidMount = () => {
     const token = localStorage.getItem("token")
     if (token) {
       fetch("http://localhost:3000/api/v1/profile", {
@@ -41,7 +44,6 @@ class App extends Component {
   })
     .then(r => r.json())
     .then(data => this.setState({ user: data.user}))
-    .then(() => this.props.history.push('/'))
   }
 
   loginHandler = (userInfo) => {
@@ -62,26 +64,29 @@ class App extends Component {
   }
 
   logOutHandler = () => {
+    console.log("click")
     localStorage.removeItem("token")
     this.props.history.push("/login")
     this.setState({ user: null })
   }
 
-
   render() {
     return (
       <div>
-        <NavBar user={this.state.user} clickHandler={this.logOutHandler} />
+        <NavBar user={this.state.user} clickHandler={this.logOutHandler}/>
         <Switch>
-          <Route exact path="/" render={()=> <Welcome user={this.state.user} />}/>
-          <Route exact path="/Zodiac" component={Zodiac} />
-          <Route exact path="/profile" component={Profile} />
-          <Route exact path="/login" render={() => <Login submitHandler={this.loginHandler} />} />
-          <Route exact path="/signup" render={() => <Signup submitHandler={this.signupHandler}/>} />
+          <Route exact path="/" render={()=> <Welcome user={this.state.user}/> }/>
+          <Route exact path="/zodiac" component={Zodiac} />
+          <Route exact path="/messages" render={() => <Messages user={this.state.user}/>} />
+          <Route exact path="/userprofile" render={()=> <UserProfile user={this.state.user}/>} />
+          <Route exact path="/users" render={()=> <SearchAllUsers user={this.state.user}/>} />
+          <Route exact path="/login" render={()=> <Login submitHandler={this.loginHandler}/>} />
+          <Route exact path="/signup" render={()=> <Signup submitHandler={this.signupHandler}/>} />
         </Switch>
       </div>
     )
   }
 }
+
 
 export default withRouter(App);
