@@ -4,4 +4,7 @@ export const HEADERS = {
     'Content_Type': 'application/json', 
     Accept: 'application/json',
 }
-
+export const PROXY = ''
+export const SUN = 'https://cors-anywhere.herokuapp.com/https://zodiacal.herokuapp.com/api'
+export const MOON = 'https://cors-anywhere.herokuapp.com/https://zodiacal.herokuapp.com/moon'
+export const RISING = 'https://cors-anywhere.herokuapp.com/https://zodiacal.herokuapp.com/rising'
