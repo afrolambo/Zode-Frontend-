@@ -1,18 +1,15 @@
 import React, {Component} from 'react';
 import ZodiacList from '../components/ZodiacList'
+import 'semantic-ui-css/semantic.min.css'
 
 
 
-class Zodiac extends Component {    
-  
-    render() {
-
+const Zodiac = ({ img, zodiac}) => {    
       return (
         <div>
-          <ZodiacList signs={this.props.zodiac} img={this.props.img} />
+          <ZodiacList signs={zodiac} img={img} />
         </div>
       );
-    }
 }
   
 

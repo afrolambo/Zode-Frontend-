@@ -1,6 +1,6 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
-import SignInfo from './SignInfo'
+import 'semantic-ui-css/semantic.min.css'
+import { Link } from 'react-router-dom'
 
 class SignCard extends React.Component {
     state = {
@@ -19,11 +19,11 @@ class SignCard extends React.Component {
         let image = this.findImg()
         let name = this.props.sign.name
         return (
-        <div>
+        <div className="four wide column">
             <h3>{name}</h3>
-            <div><img src={image.img} onClick={this.handleClick}/></div>
+           <Link to={`zodiac/${name.toLowerCase()}`}><div><img className="ui medium circular image" src={image.img} onClick={this.handleClick}/></div></Link> 
         </div>
     )}
 }
 
-export default withRouter(SignCard)
+export default SignCard

@@ -17,8 +17,8 @@ class Signup extends React.Component {
             birthdate: "", 
             birth_time: "", 
             birth_location: "", 
-            avatar: "", 
-            bio: "", 
+            avatar: "https://norrismgmt.com/wp-content/uploads/2020/05/24-248253_user-profile-default-image-png-clipart-png-download.png", 
+            bio: "Tell us about yourself", 
         }
         // this.changeHandler = this.changeHandler.bind(this)
         // this._next = this._next.bind(this)

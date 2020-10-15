@@ -1,13 +1,13 @@
 import React from 'react'
 
-const CompatibleSigns = ({sign, img}) => {
+
+const CompatibleSigns = ({sign, image}) => {
+
+    console.log(sign)
+
     return (
         <> 
-            <div>
-
-            { sign }  
-
-            </div>
+            <h1> Hello {sign[0]}</h1>
         </>
     )
 }

@@ -2,21 +2,23 @@ import React, {Component} from 'react';
 
 import NavBar from './components/NavBar'
 import Welcome from './containers/Welcome';
-import Login from './components/Login';
-import Signup from './components/Signup'
 import './CSS/App.css';
 import Zodiac from './containers/Zodiac'
 import {SUN} from './constants'
 import UserProfile from './containers/UserProfile'
-import Messages from './containers/Messages'
-import SearchAllUsers from './containers/SearchAllUsers'
+import Messenger from './containers/Messenger'
+import UsersList from './containers/UsersList'
+import UserProfilePage from './containers/UserProfilePage'
+import SignInfo from './components/SignInfo'
 
-import { Route, Switch, withRouter } from 'react-router-dom'
-import { ModalActions } from 'semantic-ui-react';
+import { Route, Switch, withRouter, Redirect } from 'react-router-dom'
 
 class App extends Component {
   state = {
-    user: null,
+    currentUser: null,
+    users: [],
+    conversations: [],
+    activeConversation: null,
     sunSigns: [], 
     zodiacSignObj: [
       {
@@ -27,7 +29,7 @@ class App extends Component {
       {
           id: "2", 
           name: "Taurus",
-          img: "https://lh3.googleusercontent.com/proxy/lpziPboC_i4Ljird7tLFLaOlIiO_pnIjkNQwWTv1AztMtKdSRW-XgXBV3HWc4McagQxUTY9fyIF3c8pcQiLyhqFS7aDWk-850HFDW44X3PxxZABltAbQ8JBq5HieL3cCegWF",
+          img: "https://www.astrorudrani.com/images/taurus.png",
       },  
       {
           id: "3", 
@@ -72,7 +74,7 @@ class App extends Component {
       {
           id: "11", 
           name: "Aquarius",
-          img: "https://lh3.googleusercontent.com/proxy/96RTQJWtpidAGNkzuUcAkMqJ5lsRyPf9DDeFsxJaN7YQMcfOvgjuF_UGZeD1ZK2fh1bx8a5JOV92eHPiY4hxgl6aeDj89YO7UrQG",
+          img: "https://www.psychhub.com.au/wp-content/uploads/2018/09/profile-aquarius-150x150.png",
       }, 
       {
           id: "12", 
@@ -90,17 +92,20 @@ class App extends Component {
         headers: { Authorization: `Bearer ${token}` }, 
       })
       .then(resp => resp.json())
-      .then(data => this.setState({user: data.user}))
+      .then(data => this.setState({currentUser: data.user}))
     } else {
-      this.props.history.push("/login")
+      this.props.history.push("/")
     } 
     fetch(SUN)
     .then(resp => resp.json())
     .then(data => this.setState({sunSigns: data}))
+
+    fetch('http://localhost:3000/api/v1/users')
+    .then(resp => resp.json())
+    .then(data => this.setState({users: data}))
   }
 
   signupHandler = (userObj) => {
-    console.log(userObj)
     fetch('http://localhost:3000/api/v1/users', {
     method: 'POST',
     headers: {
@@ -110,11 +115,10 @@ class App extends Component {
     body: JSON.stringify({ user: userObj })
   })
     .then(r => r.json())
-    .then(data => this.setState({ user: data.user}))
+    .then(data => this.setState({ currentUser: data.user}, () => this.props.history.push('/')))
   }
 
   loginHandler = (userInfo) => {
-    console.log("logging in", userInfo)
     fetch("http://localhost:3000/api/v1/login", {
       method: "POST", 
       headers: {
@@ -126,30 +130,30 @@ class App extends Component {
     .then(resp => resp.json())
     .then(data => {
       localStorage.setItem("token", data.jwt)
-      this.setState({ user: data.user}, () => this.props.history.push("/"))
+      this.setState({ currentUser: data.user}, () => this.props.history.push("/"))
     })
   }
 
   logOutHandler = () => {
-    console.log("click")
     localStorage.removeItem("token")
-    this.props.history.push("/login")
-    this.setState({ user: null })
+    this.props.history.push("/")
+    this.setState({ currentUser: null })
   }
 
   render() {
-    console.log(this.state.sunSigns)
+    console.log(this.state.currentUser)
     return (
       <div>
-        <NavBar user={this.state.user} clickHandler={this.logOutHandler}/>
+        <NavBar user={this.state.currentUser} clickHandler={this.logOutHandler}/>
         <Switch>
-          <Route exact path="/" render={()=> <Welcome user={this.state.user}/> }/>
+          <Route exact path="/" render={()=> <Welcome loginHandler={this.loginHandler} signupHandler={this.signupHandler} user={this.state.currentUser}/> }/>
           <Route exact path="/zodiac" render={() => <Zodiac img={this.state.zodiacSignObj} zodiac={this.state.sunSigns}/>} />
-          <Route exact path="/messages" render={() => <Messages user={this.state.user}/>} />
-          <Route exact path="/userprofile" render={()=> <UserProfile user={this.state.user}/>} />
-          <Route exact path="/users" render={()=> <SearchAllUsers user={this.state.user}/>} />
-          <Route exact path="/login" render={()=> <Login submitHandler={this.loginHandler}/>} />
-          <Route exact path="/signup" render={()=> <Signup submitHandler={this.signupHandler}/>} />
+          <Route path="/zodiac/:zodiacName" component={SignInfo}/>
+          <Route exact path="/conversations" render={() => <Messenger currentUser={this.state.currentUser}/>} />
+          <Route exact path="/userprofile" render={()=> <UserProfile user={this.state.currentUser}/>} />
+          <Route exact path="/users" render={()=> <UsersList user={this.state.currentUser} users={this.state.users}/>}/>
+          <Route path="/users/:userId" component={UserProfilePage} />
+          <Redirect />
         </Switch>
       </div>
     )

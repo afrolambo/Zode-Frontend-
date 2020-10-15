@@ -22,7 +22,7 @@ class NewConversationForm extends React.Component{
 
     render = () => {
         return (
-            <div className="newCOnversationForm">
+            <div className="newConversationForm">
                 <form onSubmit={this.handleSubmit}>
                     <label>New Conversation</label>
                     <br />
