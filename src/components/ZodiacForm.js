@@ -1,32 +1,90 @@
 import React from 'react'
+import {withRouter} from 'react-router-dom'
+import 'semantic-ui-css/semantic.min.css'
 
 class ZodiacForm extends React.Component {
   state = {
-    birthDate: "", 
-    birthTime: "", 
-    birthLocation: "", 
+    birthdate: "", 
+    birth_time: "", 
+    birth_location: "", 
+    sign: "",
+}
+
+setAndChange = (e) => {
+    this.changeHandler(e)
+    this.setSign(e)
+}
+
+setSign = (e) => {
+    let birthday = e.target.value.split(/\s*\-\s*/g)
+    let month = birthday[0]
+    let day = birthday[1]
+    let sign
+
+        if((month == 1 && day < 20) || (month == 12 && day > 21)) {
+            sign = "Capricorn";
+            // return sign
+          } else if ((month == 1 && day > 19) || (month == 2 && day < 19)) {
+            sign = "Aquarius";
+            // return sign
+          } else if((month == 2 && day > 18) || (month == 3 && day < 21)) {
+            sign = "Pisces";
+            // return sign
+          } else if((month == 3 && day > 20) || (month == 4 && day < 20)) {
+            sign = "Aries";
+            // return sign
+          } else if((month == 4 && day > 19) || (month == 5 && day < 21)) {
+            sign = "Taurus";
+            // return sign
+          } else if((month == 5 && day > 20) || (month == 6 && day < 21)) {
+            sign = "Gemini";
+            // return sign
+          } else if((month == 6 && day > 20) || (month == 7 && day < 23)) {
+            sign = "Cancer";
+            // return sign
+          } else if((month == 7 && day > 22) || (month == 8 && day < 23)) {
+            sign = "Leo";
+            // return sign
+          } else if((month == 8 && day > 22) || (month == 9 && day < 23)) {
+            sign = "Virgo";
+            // return sign
+          } else if((month == 9 && day > 22) || (month == 10 && day < 23)) {
+            sign = "Libra";
+            // return sign
+          } else if((month == 10 && day > 22) || (month == 11 && day < 22)) {
+            sign = "Scorpio";
+            // return sign
+          } else if((month == 11 && day > 21) || (month == 12 && day < 22)) {
+            sign = "Sagittarius";
+            // return sign
+          } 
+
+    this.setState({sign: sign})
 }
 
 changeHandler = (e) => {
     this.setState({ [e.target.name]: e.target.value })
+
+    let birthday = e.target.value.split(/\s*\-\s*/g)
+    console.log(birthday)
 }
 
-submitHandler= (e) => {
+submitHandler = (e) => {
     e.preventDefault()
     this.props.submitHandler(this.state)
 }
 
-render() {
 
+
+render() {
+    console.log(this.state)
     return ( 
             <>
                 <h1>Let Us Find Your Sign</h1>
-                <form onSubmit={this.submitHandler}>
-                    <input type="firstName" name="firstName" placeholder="First Name" value={this.state.firstName} onChange={this.changeHandler} />
-                    <input type="lastName" name="lastName" placeholder="Last Name" value={this.state.lastName} onChange={this.changeHandler} />
-                    <input type="birthDate" name="birthDate" placeholder="Birthday" value={this.state.birthDate} onChange={this.changeHandler} />
-                    <input type="birthTime" name="birthTime" placeholder="Time of Birth" value={this.state.birthTime} onChange={this.changeHandler} />
-                    <input type="birthLocation" name="birthLocation" placeholder="Location of Birth" value={this.state.birthLocation} onChange={this.changeHandler} />
+                <form onSubmit={this.submitHandler} className="ui form">
+                    <label>Month/Day/Year</label>
+                    <input type="text" name="birthdate" placeholder="mm/dd/yyyy" value={this.state.birthdate} onChange={this.setAndChange} />
+                    <input type="text" name="birth_location" placeholder="Enter City" value={this.state.birth_location} onChange={this.changeHandler} />
                     <input type="submit" value="Find Sign" />
                 </form>
             </>
@@ -34,4 +92,4 @@ render() {
 }
   }
    
-  export default ZodiacForm;
+  export default withRouter(ZodiacForm);

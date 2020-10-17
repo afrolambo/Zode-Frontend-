@@ -1,7 +1,7 @@
 import React from 'react'
 import Login from '../components/Login'
 import Signup from '../components/Signup'
-import UserProfile from './UserProfile'
+
 
 class Welcome extends React.Component {
     state = {
@@ -20,6 +20,7 @@ class Welcome extends React.Component {
                 {this.props.user? 
                 <>
                     <h1> Welcome to Zode</h1>
+                    
                     <p>A place where people can come to meet new people and form lifelong connections</p>
                 </>
                 :
