@@ -17,9 +17,13 @@ class Welcome extends React.Component {
     render() {
         return (
             <> 
-                {this.props.user? 
-                <>
+                <div>
                     <h1> Welcome to Zode</h1>
+                    
+                </div>
+                {this.props.user ? 
+                <>
+                    
                     
                     <p>A place where people can come to meet new people and form lifelong connections</p>
                 </>
@@ -27,14 +31,14 @@ class Welcome extends React.Component {
                 <>
                     {this.state.newUser ? 
                     <>
-                        <h1> Welcome to Zode </h1>
+
                         <Signup submitHandler={this.props.signupHandler} />
                         <button onClick={this.handleClick}>Returning User?</button>
 
                     </>
                     :
                     <>
-                        <h1> Welcome to Zode </h1>
+
                         <Login submitHandler={this.props.loginHandler} />
                         <button onClick={this.handleClick}>New User?</button>
                     </>

@@ -12,13 +12,11 @@ class SignInfo extends React.Component {
     state ={
         sign: {}, 
         compatibility: [],
-        signs: SIGN_IMAGES
-    
     }
 
     async componentDidMount(){
-        const name = this.props.match.params.zodiacName
-        fetch(`${SUN}/${name}`)
+        const id = this.props.match.params.id
+        fetch(`${SUN}/${id}`)
         .then(resp => resp.json())
         .then(data => this.setState({
             sign: data, 
@@ -26,45 +24,111 @@ class SignInfo extends React.Component {
         }))
     }
 
-    findSign = () => {
-        
-        let sign = this.state.signs.find(sign => sign.name === this.state.sign.name)
-        console.log(sign)
-        return sign
-        
+    compatibility = () => {
+        return this.state.compatibility.map((sign, index)=> <CompatibleSigns key={index} sign={sign}  />) 
     }
 
-    compatibility = () => {
-        // let compatibility = this.state.compatibility 
-        // const pretzel = compatibility.forEach(pretz => {
-        //     let sign = this.state.signs.find(sign => sign.name === pretz)
-            
-        // })
-        // console.log()
-        return this.state.compatibility.map((sign, index)=> <CompatibleSigns key={index} sign={sign} />)
+    likes = () => {
+
     }
     
     render() {
-        const image = this.findSign()
         const sign = this.state.sign
-        const signs = this.state.signs
-        // const compatibility = this.compatibility()
-        console.log(this.state.compatibility)
 
         return (
             <div>
-                <h1></h1>
-                <div className="ui medium circular image"> 
-                    {image ? <img src={image.img} alt={image.name}/> : "loading..." }
+                <div>
+                    <h1>{sign.name}: {sign.symbol}</h1>
+
+                    <div className="ui medium circular image"> 
+                        <img src={sign.img} alt={sign.name}/> 
+                    </div>
+                    <h3>{sign.sun_dates}</h3>
+
+                    <h2>Element: {sign.element}</h2>
+                    <h2>Cardinality: {sign.cardinality} </h2> 
+                    <h3>Ruling Planet: {sign.ruling_planet}: <br/>
+                        {sign.planet_info}</h3>
+
                 </div>
 
-                <h2>Element: {image ? image.element : "loading..."}</h2>
+                <div>
+                    <h2>About:</h2>
+                    <p>{sign.about}</p>
+                    <h3>Motto: </h3>
+                    <div>{sign.motto}</div>
+                    <h3>Secret Wish: </h3>
+                    <div>{sign.secret_wish}</div>
+                    <br/>
+                </div>
+
+                <div>
+                    <h3>Traits</h3>
+                    <div>
+                        <h4>The Good</h4>
+                        <ul>
+
+                            {sign.good_traits? 
+                                sign.good_traits.map((good, index) => (
+                                    <li key={index}>{good}</li>
+                                ))
+                            :
+                                "loading..."
+                            }
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>The Naughty</h4>
+                        <ul>
+                            {sign.bad_traits? 
+                                sign.bad_traits.map((bad, index) => (
+                                    <li key={index}>{bad}</li>
+                                ))
+                            :
+                                "loading..."
+                            }
+                        </ul>
+                    </div>
+                </div>
+
+                <div>
+                    <h3>Likes and Dislikes</h3>
+                    <div>
+                        <h4>Likes</h4>
+                        <ul>
+
+                            {sign.likes? 
+                                sign.likes.map((like, index) => (
+                                    <li key={index}>{like}</li>
+                                ))
+                            :
+                                "loading..."
+                            }
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>Dislikes</h4>
+                        <ul>
+                            {sign.dislikes? 
+                                sign.dislikes.map((dislike, index) => (
+                                    <li key={index}>{dislike}</li>
+                                ))
+                            :
+                                "loading..."
+                            }
+                        </ul>
+                    </div>
+                </div>
+
+               
                 <div>
                     <h2>Compatible Signs</h2>
-                    {this.compatibility(signs)}
+                   {this.compatibility()} 
 
                 </div>
-                <button>Back to Signs</button>
+                <Link to={`/zodiac`}>
+                    <button>Back to Signs</button>
+                </Link>
             </div>
         )
     }

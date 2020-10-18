@@ -1,7 +1,5 @@
 import React from 'react'
-// import Step1 from './SignUpSteps/Step1'
-// import Step2 from './SignUpSteps/Step2'
-// import Step3 from './SignUpSteps/Step3'
+
 
 
 class Signup extends React.Component {
@@ -45,9 +43,6 @@ class Signup extends React.Component {
                         <input type="text" name="username" placeholder="Enter a username" value={this.state.username} onChange={this.changeHandler} />
                         <input type="password" name="password" placeholder="Password" value={this.state.password} onChange={this.changeHandler} />
                         <input type="url" name="avatar" placeholder="Profile Picture(URL)" value={this.state.avatar} onChange={this.changeHandler} />
-                        {/* <input type="date" name="birthdate" value={this.state.birthdate} onChange={this.changeHandler} />
-                        <input type="time" name="birth_time" value={this.state.birth_time} onChange={this.changeHandler} />
-                        <input type="text" name="birth_location" placeholder="Enter City" value={this.state.birth_location} onChange={this.changeHandler} /> */}
                         <input type="submit" />
                     </form>
                 </>

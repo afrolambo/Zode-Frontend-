@@ -15,11 +15,12 @@ class SignCard extends React.Component {
 
             <Link to={`zodiac/${image.id}`}>
                 <div> 
-                    <img className="ui medium circular image" 
+                    <img className="ui small circular image" 
                         src={image.img} alt={image.name} 
                     />
                 </div>
             </Link> 
+            <h4>{image.sun_dates}</h4>
         </div>
         )
     }

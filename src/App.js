@@ -5,14 +5,14 @@ import Welcome from './containers/Welcome';
 import './CSS/App.css';
 import Zodiac from './containers/Zodiac'
 import {SIGN_IMAGES} from './constants'
-import UserProfile from './containers/UserProfile'
+// import MyProfile from './containers/MyProfile'
 import Messenger from './containers/Messenger'
 import DiscoverPage from './containers/DiscoverPage'
-import UserProfilePage from './containers/UserProfilePage'
+import ControllerProfilePage from './containers/ControllerProfilePage'
 import SignInfo from './components/SignInfo'
 import ZodiacFormContainer from './components/ZodiacFormContainer'
 
-import { Route, Switch, withRouter, Redirect } from 'react-router-dom'
+import { Route, Switch, withRouter, BrowserRouter, Redirect } from 'react-router-dom'
 
 class App extends Component {
   state = {
@@ -31,7 +31,9 @@ class App extends Component {
         headers: { Authorization: `Bearer ${token}` }, 
       })
       .then(resp => resp.json())
-      .then(data => this.setState({currentUser: data.user}))
+      .then(data => this.setState({
+        currentUser: data.user
+      }))
     } else {
       this.props.history.push("/")
     } 
@@ -52,7 +54,10 @@ class App extends Component {
     .then(resp => resp.json())
     .then(data => {
       localStorage.setItem("token", data.jwt)
-      this.setState({ currentUser: data.user},() => this.props.history.push('/zodiacForm')
+      this.setState({ 
+        currentUser: data.user,
+        id: data.user.id
+      },() => this.props.history.push('/zodiacForm')
         )
     })
   }
@@ -69,30 +74,48 @@ class App extends Component {
     .then(resp => resp.json())
     .then(data => {
       localStorage.setItem("token", data.jwt)
-      this.setState({ currentUser: data.user}, () => this.props.history.push("/"))
-    })
+      this.setState({ 
+        currentUser: data.user, 
+        id: data.user.id
+      }, () => this.props.history.push("/"))
+    }
+    )
+
   }
 
   logOutHandler = () => {
+    console.log("logging out...")
     localStorage.removeItem("token")
     this.props.history.push("/")
-    this.setState({ currentUser: null })
+    this.setState({ 
+      currentUser: null,
+      id: null
+
+     })
   }
 
   render() {
+    let id = () => {
+      if (this.state.currentUser){
+       return id = this.state.currentUser.id
+     }
+    }
+    
     return (
       <div>
-        <NavBar user={this.state.currentUser} clickHandler={this.logOutHandler}/>
-        <Switch>
-          <Route exact path="/" render={()=> <Welcome loginHandler={this.loginHandler} signupHandler={this.signupHandler} user={this.state.currentUser}/> }/>
-          <Route exact path="/zodiac" render={() => <Zodiac img={this.state.zodiacSignObj} />} />
-          <Route path="/zodiac/:zodiacName" component={SignInfo}/>
-          <Route path="/zodiacForm" component={ZodiacFormContainer} />
-          <Route exact path="/conversations" render={() => <Messenger currentUser={this.state.currentUser}/>} />
-          <Route exact path="/userprofile" render={()=> <UserProfile user={this.state.currentUser}/>} />
-          <Route path="/users/:id" component={UserProfilePage} />
-          <Route exact path="/users" render={()=> <DiscoverPage user={this.state.currentUser} users={this.state.users}/>}/>
-        </Switch>
+        <BrowserRouter>
+          <NavBar user={this.state.currentUser} id={this.state.id} clickHandler={this.logOutHandler}/>
+          <Switch>
+            <Route exact path="/" render={()=> <Welcome loginHandler={this.loginHandler} signupHandler={this.signupHandler} user={this.state.currentUser}/> }/>
+            <Route exact path="/zodiac" render={() => <Zodiac img={this.state.zodiacSignObj} />} />
+            <Route path="/zodiac/:id" component={SignInfo}/>
+            <Route path="/zodiacForm" component={ZodiacFormContainer} />
+            <Route exact path="/conversations" render={() => <Messenger currentUser={this.state.currentUser}/>} />
+            {/* <Route exact path="/userprofile" render={({match, props})=> <MyProfile user={this.state.currentUser} props={props} match={match}/>} /> */}
+            <Route path="/users/:id" render={({match, props}) => <ControllerProfilePage userId={this.state.id} props={props} match={match}/>} user={this.state.currentUser}/>
+            <Route exact path="/users" render={()=> <DiscoverPage user={this.state.currentUser} users={this.state.users}/>}/>
+          </Switch>
+        </BrowserRouter>
       </div>
     )
   }
