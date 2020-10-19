@@ -17,9 +17,10 @@ setAndChange = (e) => {
 
 setSign = (e) => {
     let birthday = e.target.value.split(/\s*\-\s*/g)
-    let month = birthday[0]
-    let day = birthday[1]
+    let month = birthday[1]
+    let day = birthday[2]
     let sign
+    console.log(month)
 
         if((month == 1 && day < 20) || (month == 12 && day > 21)) {
             sign = "Capricorn";
@@ -63,7 +64,13 @@ setSign = (e) => {
 }
 
 changeHandler = (e) => {
-    this.setState({ [e.target.name]: e.target.value })
+  let today = new Date() 
+    let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+
+    this.setState({ 
+      [e.target.name]: e.target.value,
+      birth_time: time 
+    })
 
     let birthday = e.target.value.split(/\s*\-\s*/g)
     console.log(birthday)
@@ -78,12 +85,13 @@ submitHandler = (e) => {
 
 render() {
     console.log(this.state)
+    
     return ( 
             <>
                 <h1>Let Us Find Your Sign</h1>
                 <form onSubmit={this.submitHandler} className="ui form">
                     <label>Month/Day/Year</label>
-                    <input type="text" name="birthdate" placeholder="mm/dd/yyyy" value={this.state.birthdate} onChange={this.setAndChange} />
+                    <input type="date" name="birthdate" placeholder="mm/dd/yyyy" value={this.state.birthdate} onChange={this.setAndChange} />
                     <input type="text" name="birth_location" placeholder="Enter City" value={this.state.birth_location} onChange={this.changeHandler} />
                     <input type="submit" value="Find Sign" />
                 </form>

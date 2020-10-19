@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink} from 'react-router-dom';
 import { Container, Menu } from 'semantic-ui-react'
 
 class NavBar extends React.Component{
@@ -16,7 +16,7 @@ class NavBar extends React.Component{
 
       return (
         <Container>
-          <Menu className="ui top five item menu" className="ui inverted segment">
+          <Menu className="ui inverted segment">
               <Menu.Item 
               as={NavLink} to="/"
               name = 'Home'

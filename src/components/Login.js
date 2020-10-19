@@ -18,7 +18,7 @@ class Login extends React.Component {
 
     render() {
         return (
-            <div className="ui centered grid container" className="ui fluid card">
+            <div className="ui centered grid container" >
 
                 <form onSubmit={this.submitHandler} className="App">
                     <h1>Login</h1>

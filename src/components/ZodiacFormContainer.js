@@ -25,7 +25,8 @@ class ZodiacFormContainer extends React.Component {
     }
 
     submitHandler= (userObj) => {
-        fetch(`${API_ROOT}/api/v1/users/${this.state.currentUser.id}`, {
+        console.log(userObj)
+        fetch(`${API_ROOT}/users/${this.state.currentUser.id}`, {
             method: 'PATCH', 
             headers: {
                 'Content-Type': 'application/json', 

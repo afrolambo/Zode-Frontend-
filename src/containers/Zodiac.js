@@ -22,7 +22,7 @@ class Zodiac extends React.Component {
         <>
           <br/>
           <div className="ui container">
-            <h1 className="zode" className="ui align center">Sun Signs</h1>
+            <h1 className="ui align center">Sun Signs</h1>
             <div className="ui grid">
               {signs}
             </div>

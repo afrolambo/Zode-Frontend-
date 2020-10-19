@@ -1,5 +1,5 @@
 import React from 'react'
-import {SUN, SIGN_IMAGES} from '../constants'
+import {SUN} from '../constants'
 import CompatibleSigns from './CompatibleSigns'
 import { Link } from 'react-router-dom'
 

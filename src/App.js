@@ -5,14 +5,15 @@ import Welcome from './containers/Welcome';
 import './CSS/App.css';
 import Zodiac from './containers/Zodiac'
 import {SIGN_IMAGES} from './constants'
-// import MyProfile from './containers/MyProfile'
+
 import Messenger from './containers/Messenger'
 import DiscoverPage from './containers/DiscoverPage'
 import ControllerProfilePage from './containers/ControllerProfilePage'
 import SignInfo from './components/SignInfo'
 import ZodiacFormContainer from './components/ZodiacFormContainer'
+// import EditProfile from './containers/EditProfile'
 
-import { Route, Switch, withRouter, BrowserRouter, Redirect } from 'react-router-dom'
+import { Route, Switch, withRouter, Navigation } from 'react-router-dom'
 
 class App extends Component {
   state = {
@@ -20,7 +21,8 @@ class App extends Component {
     users: [],
     conversations: [],
     activeConversation: null,
-    zodiacSignObj: SIGN_IMAGES
+    zodiacSignObj: SIGN_IMAGES, 
+    id: null
   }
 
   componentDidMount = () => {
@@ -31,15 +33,22 @@ class App extends Component {
         headers: { Authorization: `Bearer ${token}` }, 
       })
       .then(resp => resp.json())
-      .then(data => this.setState({
-        currentUser: data.user
-      }))
+      .then(data => 
+         this.setState({
+        currentUser: data.user, 
+        id: data.user.id
+        })
+      )
     } else {
       this.props.history.push("/")
     } 
     fetch('http://localhost:3000/api/v1/users')
     .then(resp => resp.json())
-    .then(data => this.setState({users: data}))
+    .then(data => 
+      this.setState({
+      users: data
+    })
+      )
   }
 
   signupHandler = (userObj) => {
@@ -57,7 +66,8 @@ class App extends Component {
       this.setState({ 
         currentUser: data.user,
         id: data.user.id
-      },() => this.props.history.push('/zodiacForm')
+      }
+      ,() => this.props.history.push('/zodiacForm')
         )
     })
   }
@@ -77,7 +87,7 @@ class App extends Component {
       this.setState({ 
         currentUser: data.user, 
         id: data.user.id
-      }, () => this.props.history.push("/"))
+      }, () => this.props.history.push("/", true))
     }
     )
 
@@ -95,27 +105,24 @@ class App extends Component {
   }
 
   render() {
-    let id = () => {
-      if (this.state.currentUser){
-       return id = this.state.currentUser.id
-     }
-    }
+    // const {id, username} = this.state.currentUser
+   console.log(this.state.currentUser)
     
     return (
       <div>
-        <BrowserRouter>
+
           <NavBar user={this.state.currentUser} id={this.state.id} clickHandler={this.logOutHandler}/>
           <Switch>
             <Route exact path="/" render={()=> <Welcome loginHandler={this.loginHandler} signupHandler={this.signupHandler} user={this.state.currentUser}/> }/>
             <Route exact path="/zodiac" render={() => <Zodiac img={this.state.zodiacSignObj} />} />
             <Route path="/zodiac/:id" component={SignInfo}/>
-            <Route path="/zodiacForm" component={ZodiacFormContainer} />
+            <Route exact path="/zodiacForm" component={ZodiacFormContainer} />
             <Route exact path="/conversations" render={() => <Messenger currentUser={this.state.currentUser}/>} />
-            {/* <Route exact path="/userprofile" render={({match, props})=> <MyProfile user={this.state.currentUser} props={props} match={match}/>} /> */}
             <Route path="/users/:id" render={({match, props}) => <ControllerProfilePage userId={this.state.id} props={props} match={match}/>} user={this.state.currentUser}/>
             <Route exact path="/users" render={()=> <DiscoverPage user={this.state.currentUser} users={this.state.users}/>}/>
+            {/* <Route exact path="/edit_profile_info" render={() => <EditProfile /> } /> */}
           </Switch>
-        </BrowserRouter>
+
       </div>
     )
   }
