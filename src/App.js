@@ -4,14 +4,15 @@ import NavBar from './components/NavBar'
 import Welcome from './containers/Welcome';
 import './CSS/App.css';
 import Zodiac from './containers/Zodiac'
-import {SIGN_IMAGES} from './constants'
+import {SIGN_IMAGES, HOST} from './constants'
 
 import Messenger from './containers/Messenger'
 import DiscoverPage from './containers/DiscoverPage'
 import ControllerProfilePage from './containers/ControllerProfilePage'
 import SignInfo from './components/SignInfo'
 import ZodiacFormContainer from './components/ZodiacFormContainer'
-// import EditProfile from './containers/EditProfile'
+import EditProfile from './containers/EditProfile'
+import './CSS/App.scss'
 
 import { Route, Switch, withRouter, Navigation } from 'react-router-dom'
 
@@ -28,7 +29,7 @@ class App extends Component {
   componentDidMount = () => {
     const token = localStorage.getItem("token")
     if (token) {
-      fetch("http://localhost:3000/api/v1/profile", {
+      fetch(`${HOST}/profile`, {
         method: "GET", 
         headers: { Authorization: `Bearer ${token}` }, 
       })
@@ -42,7 +43,7 @@ class App extends Component {
     } else {
       this.props.history.push("/")
     } 
-    fetch('http://localhost:3000/api/v1/users')
+    fetch(`${HOST}/users`)
     .then(resp => resp.json())
     .then(data => 
       this.setState({
@@ -52,7 +53,7 @@ class App extends Component {
   }
 
   signupHandler = (userObj) => {
-    fetch('http://localhost:3000/api/v1/users', {
+    fetch(`${HOST}/users`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -73,7 +74,7 @@ class App extends Component {
   }
 
   loginHandler = (userInfo) => {
-    fetch("http://localhost:3000/api/v1/login", {
+    fetch(`${HOST}/login`, {
       method: "POST", 
       headers: {
         'Content-Type': 'application/json', 
@@ -83,13 +84,17 @@ class App extends Component {
     })
     .then(resp => resp.json())
     .then(data => {
-      localStorage.setItem("token", data.jwt)
-      this.setState({ 
-        currentUser: data.user, 
-        id: data.user.id
-      }, () => this.props.history.push("/", true))
+      if (!data.error) {
+        localStorage.setItem("token", data.jwt)
+        this.setState({ 
+          currentUser: data.user, 
+          id: data.user.id
+        }, () => this.props.history.push("/", true))
+      }
     }
-    )
+    ).catch(error => {
+      throw(error)
+    })
 
   }
 
@@ -120,7 +125,7 @@ class App extends Component {
             <Route exact path="/conversations" render={() => <Messenger currentUser={this.state.currentUser}/>} />
             <Route path="/users/:id" render={({match, props}) => <ControllerProfilePage userId={this.state.id} props={props} match={match}/>} user={this.state.currentUser}/>
             <Route exact path="/users" render={()=> <DiscoverPage user={this.state.currentUser} users={this.state.users}/>}/>
-            {/* <Route exact path="/edit_profile_info" render={() => <EditProfile /> } /> */}
+            <Route exact path="/edit_profile_info" render={() => <EditProfile /> } />
           </Switch>
 
       </div>

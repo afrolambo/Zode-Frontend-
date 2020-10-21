@@ -1,6 +1,9 @@
 import React from 'react'
 import {withRouter} from 'react-router-dom'
 import 'semantic-ui-css/semantic.min.css'
+import findMySign from '../PNG/findMySign.png'
+import { Button, Form, Grid, Header, Image, Message, Segment, Row} from 'semantic-ui-react'
+
 
 class ZodiacForm extends React.Component {
   state = {
@@ -88,13 +91,27 @@ render() {
     
     return ( 
             <>
-                <h1>Let Us Find Your Sign</h1>
-                <form onSubmit={this.submitHandler} className="ui form">
-                    <label>Month/Day/Year</label>
-                    <input type="date" name="birthdate" placeholder="mm/dd/yyyy" value={this.state.birthdate} onChange={this.setAndChange} />
-                    <input type="text" name="birth_location" placeholder="Enter City" value={this.state.birth_location} onChange={this.changeHandler} />
-                    <input type="submit" value="Find Sign" />
-                </form>
+             <Grid textAlign='top-center' style={{ height: `100vh` }} verticalAlign="top">
+             <Grid.Column style={{maxWidth: 600}}  >
+             <img src={findMySign} alt="findMySign" style={{ height: '90%', width: '90%' }}/>
+             
+                <Form size='large' style={{maxWidth: 600}} onSubmit={this.submitHandler} >
+                  <Segment stacked>
+                      <div> 
+                        <h2>Month-Day-Year</h2>
+                        <input type="date" name="birthdate" placeholder="mm/dd/yyyy" value={this.state.birthdate} onChange={this.setAndChange} />
+                      </div>
+                      <br/>
+                      <div>
+                        <h2>Birth City</h2>
+                        <input type="text" name="birth_location" placeholder="Enter City" value={this.state.birth_location} onChange={this.changeHandler} />
+                      </div>
+                      <br/>
+                      <Button size="large" type="submit" value="Find Sign" >Find Sign</Button>
+                  </Segment>
+                </Form>
+             </Grid.Column>
+             </Grid>
             </>
     )
 }

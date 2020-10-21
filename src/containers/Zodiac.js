@@ -1,7 +1,8 @@
 import React from 'react';
 import SignCard from '../components/SignCard'
 import {SIGN_IMAGES} from '../constants'
-import 'semantic-ui-css/semantic.min.css'
+import { Container, Button, Form, Grid, Header, Image, Message, Segment, Row} from 'semantic-ui-react'
+
 
 class Zodiac extends React.Component {    
 
@@ -19,17 +20,24 @@ class Zodiac extends React.Component {
   render(){
     const signs = this.listSigns()
       return (
-        <>
-          <br/>
-          <div className="ui container">
-            <h1 className="ui align center">Sun Signs</h1>
-            <div className="ui grid">
-              {signs}
-            </div>
-          </div>
+        <Container >
+            <br/>
+            <Header as='h2' inverted textAlign='center' >Sun Signs</Header>
+          <Grid style={{ height: `100vh` }} columns={4} >
+
+              {/* <div className="ui grid"> */}
+
+                {signs}
 
 
-        </>
+
+              {/* </div> */}
+
+          </Grid> 
+
+
+
+        </Container>
       );}
 }
   

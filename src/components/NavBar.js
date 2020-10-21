@@ -1,22 +1,40 @@
 import React from 'react';
 import { NavLink} from 'react-router-dom';
-import { Container, Menu } from 'semantic-ui-react'
+import { Container, Menu, Visibility } from 'semantic-ui-react'
+import icon from '../PNG/icon.png'
+
 
 class NavBar extends React.Component{
-  state = { activeItem: 'Home'}
+  state = { 
+    activeItem: null, 
+    menuFixed: false
+  
+  }
 
   handleItemClick = (e, {name} ) => {
     this.setState({ activeItem: name })
   }
 
+  stickTopMenu = () => this.setState({menuFixed: true})
   render(props) {
 
     const {activeItem} = this.state
     console.log(this.props.id)
 
       return (
+        <Visibility
+        onBottomPassed={this.stickTopMenu}
+        onBottomVisible={this.unStickTopMenu}
+          once={false}
+        >
         <Container>
-          <Menu className="ui inverted segment">
+          <Menu size="huge" className="ui inverted segment" fixed>
+              <Menu.Item 
+                          as={NavLink} to="/"
+                          name = 'ZodeIcon'
+                        >
+                          <img size="huge" className="profile_image" className="icon" alt="icon" src={icon} /> 
+              </Menu.Item>
               <Menu.Item 
               as={NavLink} to="/"
               name = 'Home'
@@ -105,6 +123,7 @@ class NavBar extends React.Component{
               }
           </Menu>
         </Container>
+        </Visibility>
       )
   }
   

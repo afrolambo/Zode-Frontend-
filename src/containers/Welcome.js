@@ -1,6 +1,11 @@
 import React from 'react'
 import Login from '../components/Login'
 import Signup from '../components/Signup'
+import logo from '../PNG/logo.png'
+
+import { Button, Form, Grid, Header, Image, Message, Segment} from 'semantic-ui-react'
+
+
 
 
 class Welcome extends React.Component {
@@ -15,33 +20,31 @@ class Welcome extends React.Component {
     }
 
     render() {
+        const style={}
         return (
             <> 
-                <div>
-                    <h1> Welcome to Zode</h1>
+
+                        {/* <h1 className="App"> Welcome to Zode</h1> */}
                     
-                </div>
                 {this.props.user ? 
                 <>
+                    <Grid textAlign='center' style={{ height: `90vh` }} verticalAlign="middle">
+                        <div>
+                            <img src={logo} alt={logo}/>
+                        </div>
+                    </Grid>
                     
-                    
-                    <p>A place where people can come to meet new people and form lifelong connections</p>
                 </>
                 :
                 <>
                     {this.state.newUser ? 
-                    <>
 
-                        <Signup submitHandler={this.props.signupHandler} />
-                        <button onClick={this.handleClick}>Returning User?</button>
+                        <Signup submitHandler={this.props.signupHandler} handleClick={this.handleClick}/>
 
-                    </>
                     :
-                    <>
 
-                        <Login submitHandler={this.props.loginHandler} />
-                        <button onClick={this.handleClick}>New User?</button>
-                    </>
+                        <Login submitHandler={this.props.loginHandler} handleClick={this.handleClick}/>
+                        
                     } 
                 </>
                 }

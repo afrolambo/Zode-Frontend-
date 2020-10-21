@@ -1,3 +1,7 @@
+#root {
+  background: linear-gradient(350deg, rgba(168,161,194,1) 0%, rgba(99,104,139,1) 14%, rgba(43,52,82,1) 33%, rgba(46,48,66,1) 49%, rgba(41,37,48,1) 64%, rgba(12,11,17,1) 82%, rgba(0,0,0,1) 97%);
+}
+
 .App {
   text-align: center;
 }

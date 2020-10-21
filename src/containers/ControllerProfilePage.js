@@ -1,8 +1,9 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import {API_V1, SIGN_IMAGES} from '../constants'
-import { Container, Grid, Image } from 'semantic-ui-react'
+import { Container, Grid, Image, Popup, Button, Form, Header, Message, Segment, Row } from 'semantic-ui-react'
 import FollowButton from '../components/FollowButton'
+import logo from '../PNG/logo.png'
 class ControllerProfilePage extends React.Component {
 
     state = {
@@ -10,7 +11,8 @@ class ControllerProfilePage extends React.Component {
         signs: SIGN_IMAGES, 
         followStatus: null,
         followingStatus: null, 
-        followers: null
+        followers: null,
+        bio: ""
     }
     
     async componentDidMount() {
@@ -30,7 +32,8 @@ class ControllerProfilePage extends React.Component {
                 .then(resp => resp.json())
                 .then(data => this.setState({
                     userProfile: data.user,
-                    followers: data.user.followers_qty
+                    followers: data.user.followers_qty,
+                    bio: data.user.bio
 
                 }))
             } else {
@@ -100,6 +103,8 @@ class ControllerProfilePage extends React.Component {
     handleFollowClick = (e) => {
         e.preventDefault()
     }
+
+    
     
     render() {
         // const user = this.state.userProfile
@@ -108,8 +113,13 @@ class ControllerProfilePage extends React.Component {
         const user = this.state.userProfile
         const sign = this.findSign()
         const followers = this.state.followers
+        const style = {
+            borderRadius: 0,
+            opacity: 0.7,
+            padding: '1em',
+          }
         
-        console.log(user)
+        console.log(this.state.bio)
 
         return(
             <div>
@@ -117,68 +127,134 @@ class ControllerProfilePage extends React.Component {
 
             {user ? 
                 <Container className="user-profile">
-                    <Grid>
+                    <Grid style={{ height: `175vh` }} celled>
                         <Grid.Row>
-                            <div >
-                                <Image alt={user.username} src={user.avatar} size='medium' />
-                            </div>
-                            <div >
-                                <h3>  {user.username}  </h3>
-                            </div>
-                            
-                            
-                            <div>
-                                {id == me ? 
-                                    <div>
-                        
-                                        {/* <Link to="/edit_profile_info"> */}
-                                            <button>Edit Profile</button>
-                                        {/* </Link> */}
-
-                                        <Link to="/zodiacForm">
-                                            <button>Edit birth time</button>
-                                        </Link>
-                                    
-                                    </div>
-                                    :
-
-                                    <FollowButton onClick={this.toggleFollow}>{this.state.followStatus ?   "Unfollow" : "Follow" }</FollowButton>
-                                }
-
-                            </div>
-
-                            <Link to="/users"> <button>Back to Search</button> </Link>
-
-
-
-                        </Grid.Row>
-                        <Grid.Row>
-                            <div>
-                                <h3>{followers} Followers</h3>
-                            </div>
-                            <div>
-                                <h3>{user.following_qty} Following</h3>
-                            </div>
-                        </Grid.Row>
-                        <Grid.Row>
-                            <div>
+                          <Grid.Column width={6}>
+                            <Segment textAlign="center">
+                                <Image alt={user.username} src={user.avatar} size='large' circular/>
                                 <h3>{user.first_name} {user.last_name}</h3>
-                                <p>{user.bio}</p>
-                            </div>
+                            </Segment>
+                            <Segment>
+                            <Popup
+                             trigger={<Link to={`/zodiac/${sign.id}`}>
+                            {sign ? <Image src={sign.symbol} alt={sign.name} size="medium" circular /> : "loading..."}
+                            </Link>}
+                            style={style}
+                            content={`${sign.the}`}
+                            />
+                        </Segment>
+                          </Grid.Column>
+                          <Grid.Column width={10}>
+                            <Grid>
+                                <Grid.Row>
+                                            <Grid.Column width={16}>
+                                                <Segment textAlign="center" >
+                                                    <h3>  {user.username}  </h3>
+                                                </Segment>
+                                            </Grid.Column>
+                                        
+
+                                </Grid.Row>
+
+                                        <Grid.Row>
+                                        <Grid.Column width={8}>
+                                            <Segment>
+                                                <h3>{followers} {    } Followers</h3>
+                                            </Segment>
+                                                        </Grid.Column>
+                                            <Grid.Column width={8}>
+                                            <Segment>
+                                                <h3>{user.following_qty} Following</h3>
+                                            </Segment>
+                                        </Grid.Column>
+                                        </Grid.Row>
+
+                                        <Grid.Row>
+                                            <Grid.Column width={16}>
+
+
+                        <Segment style={{borderRadius:"0.5"}}>
+                                    <h3>My Bio:</h3>
+                                    <p>{user.bio}</p>
+
+                            
+                        </Segment>
+                        </Grid.Column>
+<Grid.Column width={8}>
+                        
+
+                                                
+                                            </Grid.Column>
+                                        </Grid.Row>
+
+
+                                
+                            </Grid>
+                          </Grid.Column>
+                            
+                            
                         </Grid.Row>
 
-                        <div>
-                            <h2>My Sign: </h2>
-                            <h3>{sign ? sign.name : "loading..."}</h3>
-                            <Link to="/`zodiac/${image.id}`">
-                            {sign ? <Image src={sign.symbol} alt={sign.name} size="small" /> : "loading..."}
-                            </Link>
-                        </div>
+                        <Grid.Row textAlign="center">
+                        <Grid.Column width={5}>
+                        <Segment>
+                            <Link to="/users"> <Button size="large" circular>Explore</Button> </Link>
+                        </Segment>
+</Grid.Column>
 
-                        <h3>UserSignDescription</h3>
+                            {id == me ? 
+                                            <>
+                                            <Grid.Column width={5}>
+                                                <Segment>
+                                                    <Link to={{
+                                                        pathname: "/edit_profile_info",
+                                                        state: {
+                                                            fromProfile: true, 
+                                                            userId: me, 
+                                                            bio: user.bio
+                                                        }
+                                                        }}>
+                                                        <Button size="large">Edit Bio</Button>
+                                                    </Link>
+                                                </Segment>
+                                            </Grid.Column>
+                                
+
+                                            <Grid.Column width={5}>
+                                                <Segment>
+                                                    <Link to="/zodiacForm">
+                                                        <Button size="large">Edit DOB</Button>
+                                                    </Link>
+                                                </Segment>
+                                            </Grid.Column>
+                                            
+                                            </>
+                                            :
+                                            <Grid.Column width={11}> 
+                                                <Segment>
+                                                    <FollowButton onClick={this.toggleFollow}>{this.state.followStatus ?   "Unfollow" : "Follow" }</FollowButton>
+                                                </Segment>
+                                            </Grid.Column>
+                                        }
+</Grid.Row>
+                        <Grid.Row>
+                        <Segment>
+                            <Grid.Column width={16} length={200}>
+                            <h3>Sign Info: </h3>
+                            <h3>{sign ? sign.name : "loading..."}</h3>
+                            <p>{sign ? sign.about : "loading..."}</p>
+                            </Grid.Column>
+                            </Segment>
+                        </Grid.Row>
+                        <Grid.Row align="center">
+                            <div>
+                                <Image src={logo} alt="logo" />
+                            </div>
+                        </Grid.Row>
 
                         
                     </Grid>
+
                 </Container>
                 
             :

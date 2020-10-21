@@ -11,9 +11,6 @@ class CompatibleSigns extends React.Component{
        return image
     }  
 
-    clickHandler = (e) => {
-        console.log(e)
-    }
     
     render(){
         const image = this.image()
@@ -22,8 +19,11 @@ class CompatibleSigns extends React.Component{
             <>
                 <h4> {this.props.sign} </h4>
                 {image ?
-                    <Link to={`/zodiac/${image.id}`} >
-                        <img  className="ui tiny circular image" src={image.img} alt={image.name} /> 
+                    <Link to={{
+                        pathname: `/zodiac/${image.id}`, 
+                        signId: image.id
+                        }} onClick={this.props.clickHandler}>
+                        <img  className="ui tiny circular image" src={image.img} alt={image.name} id={image.id}/> 
                     </Link>
                     : "loading..."
                 }

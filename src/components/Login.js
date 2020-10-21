@@ -1,5 +1,6 @@
 import React from 'react';
-import 'semantic-ui-css/semantic.min.css'
+import { Button, Form, Grid, Header, Image, Message, Segment, Row} from 'semantic-ui-react'
+import welcome from '../PNG/welcome.png'
 
 class Login extends React.Component {
     state = {
@@ -18,21 +19,41 @@ class Login extends React.Component {
 
     render() {
         return (
-            <div className="ui centered grid container" >
+            <>
+            <Grid textAlign='top-center' style={{ height: `100vh` }} verticalAlign="middle">
 
-                <form onSubmit={this.submitHandler} className="App">
-                    <h1>Login</h1>
-                    <div>
-                        <label>User</label>
-                        <input className="field" type="text" name="username" placeholder="Username" value={this.state.username} onChange={this.changeHandler} />
-                    </div>
-                    <div>
-                        <label>Password</label>
-                        <input className="field" type="password" name="password" placeholder="Password" value={this.state.password} onChange={this.changeHandler} />
-                    </div>
-                    <input type="submit" value="Login"/>
-                </form>
-            </div>
+                <Grid.Row>
+                    <Grid.Column style={{maxWidth: 600}}  >
+                        <div className="column twelve wide">
+
+
+                            <Form size='large' style={{maxWidth: 600}} onSubmit={this.submitHandler} className="column twelve wide">
+                                    <Header>
+                                    <img size="small" src={welcome} alt="welcome" style={{ height: '70%', width: '70%' }}/>
+                                    </Header>
+                                <Segment stacked>
+
+                                    <div>
+                                        <h3>username</h3>
+                                        <input className="field" type="text" name="username" placeholder="Username" value={this.state.username} onChange={this.changeHandler} />
+                                    </div>
+                                    <div>
+                                        <h3>password</h3>
+                                        <input className="field" type="password" name="password" placeholder="Password" value={this.state.password} onChange={this.changeHandler} />
+                                    </div>
+                                    <br/>
+                                    <Button size="large" type="submit" value="Login">Login</Button>
+                                </Segment>
+                                {/* <input type="submit" value="Login"/> */}
+                            </Form>
+                            <Message>
+                                Don't have an account? <a href='#' onClick={this.props.handleClick}> Sign Up</a>
+                            </Message>
+                        </div>
+                    </Grid.Column>
+                </Grid.Row> 
+            </Grid>
+            </>
         )
     }
 }

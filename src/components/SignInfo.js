@@ -2,6 +2,8 @@ import React from 'react'
 import {SUN} from '../constants'
 import CompatibleSigns from './CompatibleSigns'
 import { Link } from 'react-router-dom'
+import { Container, Button, Form, Grid, Header, Image, Message, Segment, Row} from 'semantic-ui-react'
+
 
 import 'semantic-ui-css/semantic.min.css'
 
@@ -12,6 +14,7 @@ class SignInfo extends React.Component {
     state ={
         sign: {}, 
         compatibility: [],
+        id: this.props.match.params.id
     }
 
     async componentDidMount(){
@@ -25,47 +28,61 @@ class SignInfo extends React.Component {
     }
 
     compatibility = () => {
-        return this.state.compatibility.map((sign, index)=> <CompatibleSigns key={index} sign={sign}  />) 
+        return this.state.compatibility.map((sign, index)=> <CompatibleSigns key={index} sign={sign} clickHandler={this.clickHandler} />) 
     }
 
-    likes = () => {
-
-    }
+   clickHandler = (e) => {
+        this.forceUpdate()
+   }
     
     render() {
+        console.log(this.state)
         const sign = this.state.sign
 
         return (
-            <div>
-                <div>
-                    <h1>{sign.name}: {sign.symbol}</h1>
+            <Container>
+            <Grid celled>
+            <Grid.Row>
+                <Grid.Column width={6}>
+                    <Segment>
+                        <h1>{sign.name}: {sign.symbol}</h1>
 
-                    <div className="ui medium circular image"> 
-                        <img src={sign.img} alt={sign.name}/> 
-                    </div>
-                    <h3>{sign.sun_dates}</h3>
+                        <div className="ui medium circular image"> 
+                            <img src={sign.img} alt={sign.name}/> 
+                        </div>
 
-                    <h2>Element: {sign.element}</h2>
-                    <h2>Cardinality: {sign.cardinality} </h2> 
-                    <h3>Ruling Planet: {sign.ruling_planet}: <br/>
-                        {sign.planet_info}</h3>
+                        <h3>Dates: </h3>
+                        <p>{sign.sun_dates}</p>
 
-                </div>
 
-                <div>
-                    <h2>About:</h2>
+                        <p> Element: {sign.element}</p>
+
+                        <p>Cardinality: {sign.cardinality} </p>
+
+                        <h3>Ruling Planet:</h3>
+                            <p>
+                        {sign.ruling_planet}: <br/>
+                            -  {sign.planet_info}</p>
+                    </Segment>
+                </Grid.Column>
+                <Grid.Column width={10}>
+                
+                <Segment>
+                    <h1>About:</h1>
                     <p>{sign.about}</p>
-                    <h3>Motto: </h3>
-                    <div>{sign.motto}</div>
-                    <h3>Secret Wish: </h3>
-                    <div>{sign.secret_wish}</div>
+                    <h1>Motto: </h1>
+                    <p>{sign.motto}</p>
+                    <h1>Secret Wish: </h1>
+                    <p>{sign.secret_wish}</p>
                     <br/>
-                </div>
-
-                <div>
-                    <h3>Traits</h3>
-                    <div>
-                        <h4>The Good</h4>
+                </Segment>
+                
+                
+                <Segment textAlign="center">
+                    <h1>Traits</h1>
+                    <Grid textAlign="left">
+                    <Grid.Column width={8}>
+                        <h3>The Good</h3>
                         <ul>
 
                             {sign.good_traits? 
@@ -76,9 +93,9 @@ class SignInfo extends React.Component {
                                 "loading..."
                             }
                         </ul>
-                    </div>
-                    <div>
-                        <h4>The Naughty</h4>
+                    </Grid.Column>
+                    <Grid.Column width={8}>
+                        <h3>The Naughty</h3>
                         <ul>
                             {sign.bad_traits? 
                                 sign.bad_traits.map((bad, index) => (
@@ -88,13 +105,16 @@ class SignInfo extends React.Component {
                                 "loading..."
                             }
                         </ul>
-                    </div>
-                </div>
-
-                <div>
-                    <h3>Likes and Dislikes</h3>
-                    <div>
-                        <h4>Likes</h4>
+                    </Grid.Column>
+                    </Grid>
+                </Segment>
+                </Grid.Column>
+            </Grid.Row>
+            <Grid.Row >
+    
+                    <Grid.Column width={8}>
+                    <Segment>
+                        <h3>Likes</h3>
                         <ul>
 
                             {sign.likes? 
@@ -105,9 +125,11 @@ class SignInfo extends React.Component {
                                 "loading..."
                             }
                         </ul>
-                    </div>
-                    <div>
-                        <h4>Dislikes</h4>
+                    </Segment>
+                    </Grid.Column>
+                    <Grid.Column width={8}>
+                        <Segment>
+                        <h3>Dislikes</h3>
                         <ul>
                             {sign.dislikes? 
                                 sign.dislikes.map((dislike, index) => (
@@ -117,19 +139,31 @@ class SignInfo extends React.Component {
                                 "loading..."
                             }
                         </ul>
-                    </div>
-                </div>
+                        </Segment>
+                    </Grid.Column>
+            </Grid.Row>
 
-               
+            </Grid>
+
+
+               <div class="ui visible right sidebar">
+               <br />
+               <br />
+               <br />
+               <br />
+               <br />
                 <div>
-                    <h2>Compatible Signs</h2>
+                    <h1>Compatible Signs</h1>
                    {this.compatibility()} 
-
-                </div>
+               <br />
+               <br />
+               <br />
                 <Link to={`/zodiac`}>
-                    <button>Back to Signs</button>
+                    <Button size="large">Back to Signs</Button>
                 </Link>
-            </div>
+                </div>
+               </div>
+            </Container>
         )
     }
 }
