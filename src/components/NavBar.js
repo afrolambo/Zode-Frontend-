@@ -1,14 +1,14 @@
 import React from 'react';
 import { NavLink} from 'react-router-dom';
-import { Container, Menu, Visibility } from 'semantic-ui-react'
+import { Container, Menu, Visibility, Image } from 'semantic-ui-react'
 import icon from '../PNG/icon.png'
+
 
 
 class NavBar extends React.Component{
   state = { 
     activeItem: null, 
     menuFixed: false
-  
   }
 
   handleItemClick = (e, {name} ) => {
@@ -22,40 +22,30 @@ class NavBar extends React.Component{
     console.log(this.props.id)
 
       return (
-        <Visibility
-        onBottomPassed={this.stickTopMenu}
-        onBottomVisible={this.unStickTopMenu}
-          once={false}
-        >
         <Container>
+        
           <Menu size="huge" className="ui inverted segment" fixed>
               <Menu.Item 
-                          as={NavLink} to="/"
-                          name = 'ZodeIcon'
-                        >
-                          <img size="huge" className="profile_image" className="icon" alt="icon" src={icon} /> 
+                as={NavLink} 
+                to="/" 
+                name = 'ZodeIcon'
+              >
+                <img size="huge" className="profile_image" className="icon" alt="icon" src={icon} /> 
               </Menu.Item>
-              <Menu.Item 
-              as={NavLink} to="/"
-              name = 'Home'
-              active={activeItem === 'Home'}
-              onClick={this.handleItemClick}
-              />
-
-              {/* <NavLink className="item" className="navLink" to="/">
-                <h3 >Home</h3> 
-              </NavLink> */}
 
               <Menu.Item 
-              as={NavLink} to="/zodiac"
-              name = 'Zodiac'
-              active={activeItem === 'Zodiac'}
-              onClick={this.handleItemClick}
+                as={NavLink} to="/"
+                name = 'Home'
+                active={activeItem === 'Home'}
+                onClick={this.handleItemClick}
               />
 
-              {/* <NavLink className="item" className="navLink" to="/zodiac">
-                <h3 >Zodiac</h3>
-              </NavLink> */}
+              <Menu.Item 
+                as={NavLink} to="/zodiac"
+                name = 'Zodiac'
+                active={activeItem === 'Zodiac'}
+                onClick={this.handleItemClick}
+              />
               
               {this.props.user ? 
                 <> 
@@ -66,10 +56,6 @@ class NavBar extends React.Component{
                     active={activeItem === 'Explore'}
                     onClick={this.handleItemClick}
                   />
-
-                {/* <NavLink className="navLink" to="/users">
-                    <h3 className="item">   Explore   </h3> 
-                </NavLink> */}
               
                   <Menu.Item 
                     as={NavLink} to="/conversations"
@@ -77,53 +63,41 @@ class NavBar extends React.Component{
                     active={activeItem === 'Messages'}
                     onClick={this.handleItemClick}
                   />
-                {/* <NavLink className="navLink" to="/conversations">Messages </NavLink> */}
 
-                  <Menu.Item 
+
+                  <Menu.Item position="right"
                     as={NavLink} to={`/users/${this.props.id}`}
                     name = 'MyProfile'
                     active={activeItem === 'MyProfile'}
                     onClick={this.handleItemClick}
                   >
-                    <img className="profile_image" alt="" src={this.props.user.avatar} /> 
+                    <img className="profile_image" alt="" src={this.props.user.avatar} circular/> 
                   </Menu.Item>
-                  {/* <Link to="/userProfile" className="item">
-                    <img className="profile_image" alt="" src={this.props.user.avatar} />  
-                  </Link> */}
-                
-                  <Menu.Item 
-                    // as={NavLink} to="/conversations"
+
+                  <Menu.Item position="right"
                     name = 'Logout'
                     active={activeItem === 'Logout'}
                     onClick={this.props.clickHandler}
                   />
               
-                {/* <span onClick={this.props.clickHandler} className="navLink">Logout</span> */}
                 </>
                 :
                 <>
                 
                     <Menu.Item 
-                      // as={NavLink} to="/userProfile"
                       name = 'MyProfile'
                       active={activeItem === 'MyProfile'}
-                      // onClick={this.handleItemClick}
                     >
                       <img className="profile_image" alt="" src="https://i.pinimg.com/originals/0d/36/e7/0d36e7a476b06333d9fe9960572b66b9.jpg" /> 
                     </Menu.Item>
               
-                {/* <div className="item">
-                    <img className="profile_image"
-                      alt=""
-                      src="https://i.pinimg.com/originals/0d/36/e7/0d36e7a476b06333d9fe9960572b66b9.jpg"
-                  />
-                </div> */}
                 </> 
 
               }
           </Menu>
+
         </Container>
-        </Visibility>
+
       )
   }
   

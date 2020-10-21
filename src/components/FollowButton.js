@@ -4,9 +4,7 @@ import {SIGN_IMAGES} from '../constants'
 import { Container, Grid, Image, Popup, Button, Form, Header, Message, Segment, Row } from 'semantic-ui-react'
 
 
-const FollowButton = ({
-    children, type, onClick, 
-}) => {
+const FollowButton = ({ children, type, onClick }) => {
 
         
         return(

@@ -1,15 +1,15 @@
 import React from 'react'
 import 'semantic-ui-css/semantic.min.css'
 import { Link } from 'react-router-dom'
-import { Button, Form, Grid, Header, Image, Message, Segment, Row, Popup} from 'semantic-ui-react'
+import { Grid, Popup} from 'semantic-ui-react'
 
 
 class SignCard extends React.Component {
 
-    
     render() {
         let image = this.props.sign
         let name = this.props.sign.name
+
         const style = {
             borderRadius: 0.5,
             opacity: 0.7,
@@ -17,7 +17,9 @@ class SignCard extends React.Component {
           }
 
         return (
-        <Grid.Column contentAlign="center" >
+
+            <Grid.Column contentAlign="center" >
+
                 <h2>{name}:</h2>
 
                 <Popup
@@ -41,7 +43,7 @@ class SignCard extends React.Component {
                     position="right-center"
                 />
 
-        </Grid.Column>
+            </Grid.Column>
         )
     }
 }

@@ -8,14 +8,14 @@ const EditForm = (changeHandler, submitHandler, bio) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(e.target.value)
+        submitHandler(e.target.value)
     }
 
     return (
         <form onSubmit={handleSubmit}>
             <label>Edit Bio
-                <br/>
-                <textarea name="bio" value={bio} onChange={handleChange} type="textBox" placeholder="tell us about yourself" />
+            <br/>
+            <textarea name="bio" value={bio} onChange={handleChange} type="textBox" placeholder="tell us about yourself" />
             </label>
             <input type="submit" />
         </form>

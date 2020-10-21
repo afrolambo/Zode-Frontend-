@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Form, Grid, Header, Image, Message, Segment, Row} from 'semantic-ui-react'
+import { Button, Form, Grid, Image, Message, Segment, Row} from 'semantic-ui-react'
 import createAccount from '../PNG/createAccount.png'
 
 
@@ -10,7 +10,6 @@ class Signup extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            // currentStep: 1,
             username: "", 
             password: "", 
             email:"", 
@@ -35,17 +34,13 @@ class Signup extends React.Component {
         this.props.submitHandler(this.state)
     }
 
-    clickHandler = () => {
-
-    }
-
-
     render() {
         return ( 
-                <>
+            <>
                 <Grid textAlign="center" style={{ height: `100vh` }} verticalAlign="middle">
                     <Grid.Row>
-                        <Grid.Column style={{maxWidth: 600}}  >
+                        <Grid.Column style={{maxWidth: 600}}>
+
                                     <img src={createAccount} alt="createAccount" style={{ height: '60%', width: '60%' }}/>
 
                             <Form size='large' style={{maxWidth: 600}} onSubmit={this.handleSubmit}>
@@ -65,13 +60,15 @@ class Signup extends React.Component {
                                     <Button size="large" type="submit" value="submit">Submit</Button>
                                 </Segment>
                             </Form>
+
                             <Message>
                                 Returning User? <a href='#' onClick={this.props.handleClick}> Log In</a>
                             </Message>
+
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>
-                </>
+            </>
         )
     }
   }

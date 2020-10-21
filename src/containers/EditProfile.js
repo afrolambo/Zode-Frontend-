@@ -2,21 +2,14 @@ import React from 'react'
 import { useHistory, withRouter } from 'react-router-dom'
 import EditForm from '../components/EditForm'
 import {HOST} from '../constants'
-import { Button, Form, Grid, Header, Image, Message, Segment, Row} from 'semantic-ui-react'
+import { Button, Form, Grid, Segment, Row} from 'semantic-ui-react'
 
 
 class EditProfile extends React.Component{
-// constructor(props){
-//     super(props)
-//     this.goBack = this.goBack.bind(this)
-// }
+
     state = {
         bio: ""
     }
-
-    // goBack(){
-    //     this.props.history.goBack()
-    // }
 
     changeHandler = (e) => {
         const {name, value} = e.target 
@@ -46,26 +39,26 @@ class EditProfile extends React.Component{
     }
 
     render() {
-        console.log(this.props.location.state)
+
         return (
             <Grid textAlign='top-center' style={{ height: `100vh` }} verticalAlign="middle">
-             <Grid.Row>
+                <Grid.Row>
                     <Grid.Column style={{maxWidth: 600}}  >
-            <div>
-                <h1>Edit Bio</h1>
-                <Form size='large' style={{maxWidth: 600}} onSubmit={this.submitHandler}>
-                    <Segment>
-                       <br/>
-                        <textarea name="bio" value={this.state.bio} onChange={this.changeHandler} type="textBox" placeholder="tell us about yourself"/>
+                        <div>
+                            <h1>Edit Bio</h1>
+                            <Form size='large' style={{maxWidth: 600}} onSubmit={this.submitHandler}>
+                                <Segment>
+                                    <br/>
+                                    <textarea name="bio" value={this.state.bio} onChange={this.changeHandler} type="textBox" placeholder="tell us about yourself"/>
 
-                    <Button type="submit" value="submit">Submit</Button>
-                    <Button onClick={this.handleClick}>Go Back</Button>
-                    </Segment>
-                </Form>
-                {/* <EditForm submitHandler={this.submitHandler} bio={this.state.bio} changeHandler={this.changeHandler} /> */}
-            </div>
-            </Grid.Column>
-            </Grid.Row>
+                                    <Button type="submit" value="submit">Submit</Button>
+                                    <Button onClick={this.handleClick}>Go Back</Button>
+                                </Segment>
+                            </Form>
+
+                        </div>
+                    </Grid.Column>
+                </Grid.Row>
             </Grid>
         )
     }
