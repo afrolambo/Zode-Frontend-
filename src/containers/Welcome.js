@@ -1,9 +1,11 @@
 import React from 'react'
 import Login from '../components/Login'
 import Signup from '../components/Signup'
+import HoroscopeContainer from './HoroscopeContainer'
+import {Link } from 'react-router-dom'
 import logo from '../PNG/logo.png'
 
-import { Grid, Image, Message, Segment} from 'semantic-ui-react'
+import { Grid, Image, Message, Segment, Button} from 'semantic-ui-react'
 
 class Welcome extends React.Component {
     state = {
@@ -17,6 +19,7 @@ class Welcome extends React.Component {
     }
 
     render() {
+        console.log(this.props.user)
         const style={}
         return (
             <> 
@@ -24,9 +27,19 @@ class Welcome extends React.Component {
                 {this.props.user ? 
                     <>
                         <Grid textAlign='center' style={{ height: `90vh` }} verticalAlign="middle">
-                            <div>
-                                <img src={logo} alt={logo}/>
-                            </div>
+                            <Grid.Column  style={{maxWidth: 800}}>
+                                <div>
+                                    <img src={logo} alt={logo}/>
+                                </div>
+                                {this.props.user.sign?
+                                    <HoroscopeContainer user={this.props.user}/>
+                                :
+                                <Link to='/zodiacForm'>
+                                <Button>Find my Sign</Button>
+                                </Link>
+                                }
+                            </Grid.Column>
+
                         </Grid>
                     </>
                 :

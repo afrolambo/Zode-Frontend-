@@ -1,6 +1,8 @@
 import React from 'react'
 import {SUN} from '../constants'
 import CompatibleSigns from './CompatibleSigns'
+import ElementModal from './ElementModal'
+import ModalityModal from './ModalityModal'
 import { Link } from 'react-router-dom'
 import { Container, Button, Form, Grid, Image, Segment, Row} from 'semantic-ui-react'
 
@@ -34,6 +36,8 @@ class SignInfo extends React.Component {
     
     render() {
         const sign = this.state.sign
+        let element = "Element"
+        let modality = "Modality"
 
         return (
             <Container>
@@ -52,9 +56,14 @@ class SignInfo extends React.Component {
                                 <p>{sign.sun_dates}</p>
 
 
-                                <p> Element: {sign.element}</p>
+                                <p> Element: <ElementModal sign={sign.name} obj={sign.element} type={element}>{sign.element}</ElementModal></p>
+                                <div>
 
-                                <p>Cardinality: {sign.cardinality} </p>
+
+                                
+
+                                <p>Modality: <ModalityModal sign={sign.name} obj={sign.cardinality} type={modality}>{sign.cardinality}</ModalityModal> </p>
+                                </div>
 
                                 <h3>Ruling Planet:</h3>
                                 <p> {sign.ruling_planet}: <br/>

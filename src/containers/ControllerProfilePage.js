@@ -3,6 +3,8 @@ import {Link} from 'react-router-dom'
 import {HOST, SIGN_IMAGES} from '../constants'
 import { Container, Grid, Image, Popup, Button, Segment, Row } from 'semantic-ui-react'
 import FollowButton from '../components/FollowButton'
+import FollowersModal from '../components/FollowersModal'
+import FollowingModal from '../components/FollowingModal'
 import logo from '../PNG/logo.png'
 class ControllerProfilePage extends React.Component {
 
@@ -136,13 +138,14 @@ class ControllerProfilePage extends React.Component {
                                 <Grid.Row>
                                     <Grid.Column width={8}>
                                         <Segment>
-                                            <h3>{followers} {    } Followers</h3>
+                                            <h3>{followers} <FollowersModal id={id}>Followers</FollowersModal></h3>
                                         </Segment>
                                     </Grid.Column>
 
                                     <Grid.Column width={8}>
                                         <Segment>
-                                            <h3>{user.following_qty} Following</h3>
+                                            <h3>{user.following_qty} <FollowingModal id={id}>Following</FollowingModal></h3>
+                                            {/* <h3>{user.following_qty} Following</h3> */}
                                         </Segment>
                                     </Grid.Column>
                                 </Grid.Row>

@@ -1,15 +1,13 @@
 export const HOST = 'http://localhost:3000/api/v1'
 export const API_ROOT = 'http://localhost:3000/api/v1';
 export const API_V1 = 'http://localhost:3000/api/v1';
-export const API_WS_ROOT = 'ws://localhost:3000/api/v1/cable';
+export const ROOT = 'http://localhost:3000'
 export const HEADERS = {
     'Content_Type': 'application/json', 
     Accept: 'application/json',
 }
 
 export const SUN = 'http://localhost:3000/api/v1/zodiac'
-export const MOON = 'https://cors-anywhere.herokuapp.com/https://zodiacal.herokuapp.com/moon'
-export const RISING = 'https://cors-anywhere.herokuapp.com/https://zodiacal.herokuapp.com/rising'
 export const SIGN_IMAGES = [
     {
         id: "1", 
@@ -161,7 +159,7 @@ export const SIGN_IMAGES = [
         spiritColor: "Sky Blue", 
         luckyGem: "Amethyst", 
         sunDates: "Jan 20 - Feb 18",
-        about: "Aquarians are creative, witty, and revolutionary. They are unconventional and dynamic and they are fixers. They are always trying to fix people, fix themselves or fix the world. They have big hearts and they care about the world and healing people."
+        about: "Aquarians are creative, witty, and revolutionary. They are unconventional and dynamic and they are fixers. They are always trying to fix people, fix themselves or fix the world. They have big hearts and they care about the world and healing people.",
         
     }, 
     {
@@ -175,8 +173,121 @@ export const SIGN_IMAGES = [
         spiritColor: "Sea Green", 
         luckyGem: "Moonstone", 
         sunDates: "Feb 19 - March 20", 
-        about: "They are imaginative, sensual and romantic. They are also sensitive to the needs of others and are very compassionate. They always feel things so deeply and they are always giving without expecting anything in return. They are easily moved by stories and inspired by people."
+        about: "They are imaginative, sensual and romantic. They are also sensitive to the needs of others and are very compassionate. They always feel things so deeply and they are always giving without expecting anything in return. They are easily moved by stories and inspired by people.",
         
     }
   ]
+
+  export const HOROSCOPE = [
+    {
+        id: "1", 
+        name: "Aries",
+        element: "Like fire itself, fire signs tend to be passionate, dynamic, and temperamental. Fire can keep you warm, or it can do great destruction. While fire burns out quickly without fuel to keep it going, it can also regenerate its power from the ashes. A single spark can set off a forest fire. As a result, fire signs need to be nurtured and managed carefully.", 
+        cardinality: "Cardinal signs are initiators; they start the season. They are the leaders who brings forth the start of a season. They are pioneering and enterprising. Aries (spring), Cancer (summer), Libra (autumn), and Capricorn (winter), are the Cardinal signs.", 
+        scope: "The world has been doing its best to convince you that your passion is some hot and embarrassing thing, unwieldy in its potency, unseemly in its might. Sometimes, when the world reacts to you this way, you end up trying instinctively to make yourself seem a little less threatening, a little more brightly appealing. This week, forget all that. Your magic isn’t a bright wispy thing, and it never will be. It’s okay to have strong opinions, okay to be direct. Your power was never meant to be pleasingly decorative, so don’t expect it to be.",
+        elementPic: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Alchemy_fire_symbol.svg/600px-Alchemy_fire_symbol.svg.png",
+        cardinalityPic: "https://www.astrology42.com/wp-content/uploads/2018/09/cardinal-signs-symbol.png"
+    }, 
+    {
+        id: "2", 
+        name: "Taurus",
+        element: "Earth signs keep it real. They are the “grounded” people on the planet, the ones who bring us down to earth and remind us to start with a solid foundation. Slow and steady, these “builders” are loyal and stable, and stick by their people through hard times. On good days, they’re practical; at worst, they can be materialistic or too focused on the surface of things to dig into the depths.", 
+        cardinality: "If you are a Fixed sign, you are the second month in a season and it is your job to maintain that season. Fixed signs concentrate energy and solidify ideas. Taurus (spring), Leo (summer), Scorpio (autumn), and Aquarius (winter), are the Fixed signs.",
+        scope: "Getting yourself un-lost is often a painful process at first—it means being honest with yourself about the wrong turns you’ve taken, honest about how much you wish you were someplace other than this. This week, if you’ve been feeling stuck or strange or confused about the direction you’re headed, try to engage in this kind of honesty with yourself. You don’t have to make big plans or decisions yet; just be willing to to look around you, to keep your eyes open and tell the truth about what you see.",
+        elementPic: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Alchemy_earth_symbol.svg/1200px-Alchemy_earth_symbol.svg.png",
+        cardinalityPic: "https://www.astrology42.com/wp-content/uploads/2018/09/fixed-signs-symbol.png"
+    },  
+    {
+        id: "3", 
+        name: "Gemini",
+        element: "Air signs are all about action, ideas, and motion—they are the “winds of change.” When a strong gust hits you, you can’t help but move. While some within their ranks may be true-life “airheads,” others are as powerful as a gravity-defying G-force. Air signs bring everyone a breath of fresh air when things start to get stale. Like the breeze, you can’t quite catch them, and you never know where they’ll drop you once they sweep you up. It will almost always been an adventure, though.", 
+        cardinality: "Mutable signs, are the third (and final) month within each season. The role for these signs is to prepare for the transition to the next season and their traits are communication, flexibility, and destruction. In a nutshell, wrapping things up. Mutable signs are Gemini (late spring), Virgo (late summer), Sagittarius (late autumn) and Pisces (late winter).",
+        scope: "You’re good about remaining open to possibilities; sometimes, though, this can prevent you from doing deeper, more focused work. Keeping yourself open to all ideas can be like standing forever in the doorway, never entering and never leaving, caught in a permanent stasis although you’re surrounded by possibility. This week, try to take action, no matter how seemingly small. Give yourself permission to choose a direction and follow it for a while. Give yourself permission to stop hedging, stop waiting, and commit to your ideas.",
+        elementPic: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Alchemy_air_symbol.svg/1200px-Alchemy_air_symbol.svg.png",
+        cardinalityPic: "https://www.astrology42.com/wp-content/uploads/2018/09/mutable-signs-symbol.png"
+    }, 
+    {
+        id: "4", 
+        name: "Cancer",
+        element: "Intuitive, emotional and ultra-sensitive, water signs can be as mysterious as the ocean itself. Like water, they can be refreshing, or they can drown you in their depths. These signs often have intense dreams and borderline-psychic intuition. Security is important to them—after all, water needs a container, or it dries up and disappears.", 
+        cardinality: "Cardinal signs are initiators; they start the season. They are the leaders who brings forth the start of a season. They are pioneering and enterprising. Aries (spring), Cancer (summer), Libra (autumn), and Capricorn (winter), are the Cardinal signs.",
+        scope: "This week, try taking off whatever mask has grown too cumbersome to wear. Try giving yourself permission to stop playing a role that no longer quite fits. This doesn’t mean you need to bare your entire soul to the world. A mask, after all, can be a tool for survival, and playing a role can bring shape and meaning to your life. The important thing, this week, is to make sure that any part you play is the right one, and that it is leading you toward the future you want.",
+        elementPic: "https://www.pinclipart.com/picdir/big/18-182957_image-result-for-water-element-alchemy-symbol-public.png",
+        cardinalityPic: "https://www.astrology42.com/wp-content/uploads/2018/09/cardinal-signs-symbol.png"
+    }, 
+    {
+        id: "5", 
+        name: "Leo",
+        element: "Like fire itself, fire signs tend to be passionate, dynamic, and temperamental. Fire can keep you warm, or it can do great destruction. While fire burns out quickly without fuel to keep it going, it can also regenerate its power from the ashes. A single spark can set off a forest fire. As a result, fire signs need to be nurtured and managed carefully.", 
+        cardinality: "If you are a Fixed sign, you are the second month in a season and it is your job to maintain that season. Fixed signs concentrate energy and solidify ideas. Taurus (spring), Leo (summer), Scorpio (autumn), and Aquarius (winter), are the Fixed signs.",
+        scope: "This week, you might become aware of a bright spark of jealousy shooting through you. It’s not the most pleasant of feelings, and the temptation might be to ignore it, or bury it, or shove it somewhere far away from yourself. Don’t let this feeling control you, but try not to discount it, either. Jealousy can be an indicator of desire, so pay attention to what it reveals. Allow yourself to want the things you don’t already have, the things you can hardly even see a path to.",
+        elementPic: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Alchemy_fire_symbol.svg/600px-Alchemy_fire_symbol.svg.png",
+        cardinalityPic: "https://www.astrology42.com/wp-content/uploads/2018/09/fixed-signs-symbol.png"
+    }, 
+    {
+        id: "6", 
+        name: "Virgo",
+        element: "Earth signs keep it real. They are the “grounded” people on the planet, the ones who bring us down to earth and remind us to start with a solid foundation. Slow and steady, these “builders” are loyal and stable, and stick by their people through hard times. On good days, they’re practical; at worst, they can be materialistic or too focused on the surface of things to dig into the depths.", 
+        cardinality: "Mutable signs, are the third (and final) month within each season. The role for these signs is to prepare for the transition to the next season and their traits are communication, flexibility, and destruction. In a nutshell, wrapping things up. Mutable signs are Gemini (late spring), Virgo (late summer), Sagittarius (late autumn) and Pisces (late winter).",
+        scope: "It’s strangely easy to define yourself solely in relation to other people. Whether you’re building your life in accordance with what they want from you or in defiance of it, they’re still setting the terms. This week, it’s possible to break out of this mindset altogether. Other people can’t establish the boundaries of your imagination, and they can’t set limits on your desires. This is a week for spending time in the quiet space of your inner life. This is a week to rely on your heart’s enduring, rebellious weirdness to show you the way.", 
+        elementPic: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Alchemy_earth_symbol.svg/1200px-Alchemy_earth_symbol.svg.png",
+        cardinalityPic: "https://www.astrology42.com/wp-content/uploads/2018/09/mutable-signs-symbol.png"
+}, 
+    {
+        id: "7", 
+        name: "Libra",
+        element: "Air signs are all about action, ideas, and motion—they are the “winds of change.” When a strong gust hits you, you can’t help but move. While some within their ranks may be true-life “airheads,” others are as powerful as a gravity-defying G-force. Air signs bring everyone a breath of fresh air when things start to get stale. Like the breeze, you can’t quite catch them, and you never know where they’ll drop you once they sweep you up. It will almost always been an adventure, though.", 
+        cardinality: "Cardinal signs are initiators; they start the season. They are the leaders who brings forth the start of a season. They are pioneering and enterprising. Aries (spring), Cancer (summer), Libra (autumn), and Capricorn (winter), are the Cardinal signs.",
+        scope: "This week, commit to not losing yourself to other people—not letting your own beliefs be subsumed by theirs, not letting your own song get drowned out when they start singing louder. No matter how much you love sweetness and preserving the peace, you possess a power of your own, so hold onto it; don’t overlook it. When you join together with other people, let it be on terms that don’t erase you. When you care for the world around you, let it be in a way that sustains you, that returns your sweetness to you at the end of the long day.",
+        elementPic: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Alchemy_air_symbol.svg/1200px-Alchemy_air_symbol.svg.png",
+        cardinalityPic: "https://www.astrology42.com/wp-content/uploads/2018/09/cardinal-signs-symbol.png"
+    }, 
+    {
+        id: "8", 
+        name: "Scorpio",
+        element: "Intuitive, emotional and ultra-sensitive, water signs can be as mysterious as the ocean itself. Like water, they can be refreshing, or they can drown you in their depths. These signs often have intense dreams and borderline-psychic intuition. Security is important to them—after all, water needs a container, or it dries up and disappears.", 
+        cardinality: "If you are a Fixed sign, you are the second month in a season and it is your job to maintain that season. Fixed signs concentrate energy and solidify ideas. Taurus (spring), Leo (summer), Scorpio (autumn), and Aquarius (winter), are the Fixed signs.",
+        scope: "This week, it’s possible to reconnect with yourself again—to recover the sharp clarity of purpose that’s felt blocked or missing lately. This week, you can find a way back to a path you thought you’d lost. You can reconnect to the physical truth of your body, and to the wild fluid strength of your emotions. Your life has more to offer you than pretty falsehoods. If your true power has seemed to be in hibernation, this week it can wake up again. There are better things waiting for you than days of empty comfort.",
+        elementPic: "https://www.pinclipart.com/picdir/big/18-182957_image-result-for-water-element-alchemy-symbol-public.png",
+        cardinalityPic: "https://www.astrology42.com/wp-content/uploads/2018/09/fixed-signs-symbol.png"
+    }, 
+    {
+        id: "9", 
+        name: "Sagittarius",
+        element: "Like fire itself, fire signs tend to be passionate, dynamic, and temperamental. Fire can keep you warm, or it can do great destruction. While fire burns out quickly without fuel to keep it going, it can also regenerate its power from the ashes. A single spark can set off a forest fire. As a result, fire signs need to be nurtured and managed carefully.", 
+        cardinality: "Mutable signs, are the third (and final) month within each season. The role for these signs is to prepare for the transition to the next season and their traits are communication, flexibility, and destruction. In a nutshell, wrapping things up. Mutable signs are Gemini (late spring), Virgo (late summer), Sagittarius (late autumn) and Pisces (late winter).",
+        scope: "There are plenty of good reasons to let some small problems go—it’s not always worth your time to correct every insignificant fact or defend yourself against every potential misunderstanding. Knowing when it’s wiser to just keep moving is a valuable skill, but make sure you’re not using this as a way to avoid important work. This week, it’s worth your time to address the things that matter. Every time you refuse to let someone get away with underestimating you, or with misrepresenting the truth, your power will shine brighter and brighter.",
+        elementPic: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Alchemy_fire_symbol.svg/600px-Alchemy_fire_symbol.svg.png",
+        cardinalityPic: "https://www.astrology42.com/wp-content/uploads/2018/09/mutable-signs-symbol.png"
+    }, 
+    {
+        id: "10", 
+        name: "Capricorn",
+        element: "Earth signs keep it real. They are the “grounded” people on the planet, the ones who bring us down to earth and remind us to start with a solid foundation. Slow and steady, these “builders” are loyal and stable, and stick by their people through hard times. On good days, they’re practical; at worst, they can be materialistic or too focused on the surface of things to dig into the depths.", 
+        cardinality: "Cardinal signs are initiators; they start the season. They are the leaders who brings forth the start of a season. They are pioneering and enterprising. Aries (spring), Cancer (summer), Libra (autumn), and Capricorn (winter), are the Cardinal signs.",
+        scope: "This is a week for taking seriously the power of narrative to shape the way you live. Sometimes, it becomes necessary to revise the stories that have stopped reflecting the world accurately; sometimes, it becomes necessary to re-evaluate the lessons you’ve distilled from the story of your own life. Above all, it’s a week for acknowledging that for all your discipline and practicality, you rely, as much as anyone else, on narrative and myth to make sense of the world. It’s not a bad thing or a weakness, but a simple truth: there’s more to the world than the things you can touch.",
+        elementPic: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Alchemy_earth_symbol.svg/1200px-Alchemy_earth_symbol.svg.png",
+        cardinalityPic: "https://www.astrology42.com/wp-content/uploads/2018/09/cardinal-signs-symbol.png"
+    }, 
+    {
+        id: "11", 
+        name: "Aquarius",
+        element: "Air signs are all about action, ideas, and motion—they are the “winds of change.” When a strong gust hits you, you can’t help but move. While some within their ranks may be true-life “airheads,” others are as powerful as a gravity-defying G-force. Air signs bring everyone a breath of fresh air when things start to get stale. Like the breeze, you can’t quite catch them, and you never know where they’ll drop you once they sweep you up. It will almost always been an adventure, though.", 
+        cardinality: "If you are a Fixed sign, you are the second month in a season and it is your job to maintain that season. Fixed signs concentrate energy and solidify ideas. Taurus (spring), Leo (summer), Scorpio (autumn), and Aquarius (winter), are the Fixed signs.",
+        scope: "It’s an uneasy way to live, feeling like certain parts of your mind are valued while the rest are only tolerated; like all the best parts of your soul are the parts that are most difficult for other people to see clearly. There are good reasons why it’s sometimes useful to be conciliatory, more broadly appealing, less difficult and strange. This week, though, trying to hide your unruly spirit is unlikely to work. Don’t start thinking that just because other people want you to be charming, your charm is the only good thing about you. Rebellion is your birthright; strangeness is your gift.",
+        elementPic: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Alchemy_air_symbol.svg/1200px-Alchemy_air_symbol.svg.png",
+        cardinalityPic: "https://www.astrology42.com/wp-content/uploads/2018/09/fixed-signs-symbol.png"
+    }, 
+    {
+        id: "12", 
+        name: "Pisces",
+        element: "Intuitive, emotional and ultra-sensitive, water signs can be as mysterious as the ocean itself. Like water, they can be refreshing, or they can drown you in their depths. These signs often have intense dreams and borderline-psychic intuition. Security is important to them—after all, water needs a container, or it dries up and disappears.", 
+        cardinality: "Mutable signs, are the third (and final) month within each season. The role for these signs is to prepare for the transition to the next season and their traits are communication, flexibility, and destruction. In a nutshell, wrapping things up. Mutable signs are Gemini (late spring), Virgo (late summer), Sagittarius (late autumn) and Pisces (late winter).",
+        scope: "This is a week to fully appreciate your curiosity and acknowledge all that you don’t know. It can feel strange and difficult to look at the gaps in your knowledge and see anything other than a deficiency to be fixed, but this week, hold onto the wisdom that comes from not knowing everything. Right now, mystery holds more potential and more life than certainty ever could. Imperfection offers the space you so desperately need to wonder and dream and move.",
+        elementPic: "https://www.pinclipart.com/picdir/big/18-182957_image-result-for-water-element-alchemy-symbol-public.png",
+        cardinalityPic: "https://www.astrology42.com/wp-content/uploads/2018/09/mutable-signs-symbol.png"
+    }
+  ]
+
+
 
