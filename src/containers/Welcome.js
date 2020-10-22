@@ -26,7 +26,7 @@ class Welcome extends React.Component {
                     
                 {this.props.user ? 
                     <>
-                        <Grid textAlign='center' style={{ height: `90vh` }} verticalAlign="middle">
+                        <Grid textAlign='center' style={{ height: `100vh` }} verticalAlign="middle">
                             <Grid.Column  style={{maxWidth: 800}}>
                                 <div>
                                     <img src={logo} alt={logo}/>

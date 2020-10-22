@@ -8,7 +8,7 @@ $yellow: #F9DF74;
 $spink: #BD4089;
 
 h1 {
-    color: $yellow
+    color: $rose
 }
 
 h2 {
@@ -20,7 +20,7 @@ h3 {
 }
 
 p {
-    font-size: 24px;
+    font-size: 20px;
 }
 
 li {
@@ -33,6 +33,17 @@ li {
 
 .horoscope {
     font-size: 18px;
+}
+
+.about {
+    color: $cream
+}
+
+.userSign {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
 }
 
 

@@ -15,9 +15,11 @@ class HoroscopeContainer extends Component{
     console.log(sign)
         return(
             <div>
-                <h1>Hello {this.props.user.username} Welcome to Zode</h1>
+                <h1>Hello {this.props.user.username} Welcome to Zodē</h1>
                 <h2>Here's your weekly Horoscope:</h2>
-                <Segment> <div className="horoscope">{sign.scope}</div> </Segment>
+                <Segment>
+                    <Segment> <div className="horoscope">{sign.scope}</div> </Segment>
+                </Segment>
             </div>
         )
     }

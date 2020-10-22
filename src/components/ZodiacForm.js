@@ -98,12 +98,12 @@ render() {
                 <Form size='large' style={{maxWidth: 600}} onSubmit={this.submitHandler} >
                   <Segment stacked>
                       <div> 
-                        <h2>Month-Day-Year</h2>
+                        <h3>Month-Day-Year</h3>
                         <input type="date" name="birthdate" placeholder="mm/dd/yyyy" value={this.state.birthdate} onChange={this.setAndChange} />
                       </div>
                       <br/>
                       <div>
-                        <h2>Birth City</h2>
+                        <h3>Birth City</h3>
                         <input type="text" name="birth_location" placeholder="Enter City" value={this.state.birth_location} onChange={this.changeHandler} />
                       </div>
                       <br/>

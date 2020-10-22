@@ -6,6 +6,8 @@ import FollowButton from '../components/FollowButton'
 import FollowersModal from '../components/FollowersModal'
 import FollowingModal from '../components/FollowingModal'
 import logo from '../PNG/logo.png'
+import signInfoL from '../PNG/signInfoL.png'
+import signInfoText from '../PNG/signInfoText.png'
 class ControllerProfilePage extends React.Component {
 
     state = {
@@ -105,23 +107,24 @@ class ControllerProfilePage extends React.Component {
 
             {user ? 
                 <Container className="user-profile">
-                    <Grid style={{ height: `175vh` }} >
+                    <Grid style={{ height: `190vh` }} >
                         <Grid.Row>
                           <Grid.Column width={6}>
-                            <Segment textAlign="center">
+                            <div textAlign="center">
                                 <Image alt={user.username} src={user.avatar} size='large' circular/>
-                                <h3>{user.first_name} {user.last_name}</h3>
-                            </Segment>
+                                <h1 className="App">{user.first_name} {user.last_name}</h1>
+                            </div>
 
-                            <Segment>
+                            <div>
+                            <br/>
                                 <Popup
                                     trigger={<Link to={`/zodiac/${sign.id}`}>
-                                    {sign ? <Image src={sign.symbol} alt={sign.name} size="medium" circular /> : "loading..."}
+                                    {sign ? <Image className="userSign" src={sign.img} alt={sign.name} size="small" circular /> : "loading..."}
                                     </Link>}
                                     style={style}
                                     content={`${sign.the}`}
                                 />
-                            </Segment>
+                            </div>
                           </Grid.Column>
 
                           <Grid.Column width={10}>
@@ -137,23 +140,22 @@ class ControllerProfilePage extends React.Component {
 
                                 <Grid.Row>
                                     <Grid.Column width={8}>
-                                        <Segment>
-                                            <h3>{followers} <FollowersModal id={id}>Followers</FollowersModal></h3>
-                                        </Segment>
+                                        <div>
+                                            <h1 className="App">{followers} <FollowersModal id={id}>Followers</FollowersModal></h1>
+                                        </div>
                                     </Grid.Column>
 
                                     <Grid.Column width={8}>
-                                        <Segment>
-                                            <h3>{user.following_qty} <FollowingModal id={id}>Following</FollowingModal></h3>
-                                            {/* <h3>{user.following_qty} Following</h3> */}
-                                        </Segment>
+                                        <div>
+                                            <h1 className="App">{user.following_qty} <FollowingModal id={id}>Following</FollowingModal></h1>
+                                        </div>
                                     </Grid.Column>
                                 </Grid.Row>
 
                                 <Grid.Row>
                                     <Grid.Column width={16}>
                                         <Segment style={{borderRadius:"0.5"}}>
-                                            <h3>My Bio:</h3>
+                                            <h3>Bio:</h3>
                                             <p>{user.bio}</p>
                                         </Segment>
                                     </Grid.Column>
@@ -162,17 +164,17 @@ class ControllerProfilePage extends React.Component {
                           </Grid.Column>
                         </Grid.Row>
 
-                        <Grid.Row textAlign="center">
+                        <Grid.Row textAlign="center" length={5}>
                             <Grid.Column width={5}>
-                                <Segment>
+                                <div>
                                     <Link to="/users"> <Button size="large" circular>Explore</Button> </Link>
-                                </Segment>
+                                </div>
                             </Grid.Column>
 
                             {id == me ? 
                                 <>
                                     <Grid.Column width={5}>
-                                        <Segment>
+                                        <div>
                                             <Link to={{
                                                 pathname: "/edit_profile_info",
                                                 state: {
@@ -183,41 +185,53 @@ class ControllerProfilePage extends React.Component {
                                                 }}>
                                                 <Button size="large">Edit Bio</Button>
                                             </Link>
-                                        </Segment>
+                                        </div>
                                     </Grid.Column>
                         
                                     <Grid.Column width={5}>
-                                        <Segment>
+                                        <div>
                                             <Link to="/zodiacForm">
                                                 <Button size="large">Edit DOB</Button>
                                             </Link>
-                                        </Segment>
+                                        </div>
                                     </Grid.Column>
                                 
                                 </>
                                 :
                                 <Grid.Column width={11}> 
-                                    <Segment>
+                                    <div>
                                         <FollowButton onClick={this.toggleFollow}>{this.state.followStatus ?   "Unfollow" : "Follow" }</FollowButton>
-                                    </Segment>
+                                    </div>
                                 </Grid.Column>
                             }
                         </Grid.Row>
 
                         <Grid.Row>
-                            <Segment>
-                                <Grid.Column width={16} length={200}>
-                                    <h3>Sign Info: </h3>
+                            <Grid.Column width={5} verticalAlign="bottom">
+                                <div>
+                                    <Image className="userSign" src={signInfoL} alt="signInfoL" />
+                                </div>
+                            </Grid.Column>
+
+                            <Grid.Column width={11} length={200}>
+                                    <Image className="userSign" src={signInfoText} alt="signInfoText" />
+                                <Segment>
                                     <h3>{sign ? sign.name : "loading..."}</h3>
                                     <p>{sign ? sign.about : "loading..."}</p>
-                                </Grid.Column>
-                            </Segment>
+                                </Segment>
+                            </Grid.Column>
+
+                            <Grid.Column width={1} length={200}>
+                            <br/>
+                            </Grid.Column>
                         </Grid.Row>
 
                         <Grid.Row align="center">
+                        <Grid.Column width={16}>
                             <div>
-                                <Image src={logo} alt="logo" />
+                                <Image className="userSign" src={logo} alt="logo" />
                             </div>
+                        </Grid.Column>
                         </Grid.Row>
 
                     </Grid>

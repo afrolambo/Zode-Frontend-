@@ -3,6 +3,10 @@ import {SUN} from '../constants'
 import CompatibleSigns from './CompatibleSigns'
 import ElementModal from './ElementModal'
 import ModalityModal from './ModalityModal'
+import likes from '../PNG/likes.png'
+import dislikes from '../PNG/dislikes.png'
+import thegood from '../PNG/thegood.png'
+import thenaughty from '../PNG/thenaughty.png'
 import { Link } from 'react-router-dom'
 import { Container, Button, Form, Grid, Image, Segment, Row} from 'semantic-ui-react'
 
@@ -45,53 +49,74 @@ class SignInfo extends React.Component {
                     <Grid.Row>
                         <Grid.Column width={6}>
 
-                            <Segment>
+                            <div>
+                            <br />
                                 <h1>{sign.name}: {sign.symbol}</h1>
 
                                 <div className="ui medium circular image"> 
                                     <img src={sign.img} alt={sign.name}/> 
                                 </div>
 
-                                <h3>Dates: </h3>
-                                <p>{sign.sun_dates}</p>
+                                <h1>Dates: </h1>
+                                <p className="about">{sign.sun_dates}</p>
 
 
-                                <p> Element: <ElementModal sign={sign.name} obj={sign.element} type={element}>{sign.element}</ElementModal></p>
+                                <p className="about"> Element: <ElementModal sign={sign.name} obj={sign.element} type={element}>{sign.element}</ElementModal></p>
                                 <div>
 
 
                                 
 
-                                <p>Modality: <ModalityModal sign={sign.name} obj={sign.cardinality} type={modality}>{sign.cardinality}</ModalityModal> </p>
+                                <p className="about">Modality: <ModalityModal sign={sign.name} obj={sign.cardinality} type={modality}>{sign.cardinality}</ModalityModal> </p>
                                 </div>
 
-                                <h3>Ruling Planet:</h3>
-                                <p> {sign.ruling_planet}: <br/>
+                                <h1>Ruling Planet:</h1>
+                                <p className="about"> {sign.ruling_planet}: <br/>
                                 -  {sign.planet_info}</p>
-                            </Segment>
+                            </div>
 
                         </Grid.Column>
 
                         <Grid.Column width={10}>
                 
-                            <Segment>
-                                <h1>About:</h1>
-                                <p>{sign.about}</p>
-                                <h1>Motto: </h1>
-                                <p>{sign.motto}</p>
-                                <h1>Secret Wish: </h1>
-                                <p>{sign.secret_wish}</p>
+                            <Container>
                                 <br/>
-                            </Segment>
+                                <h1>About:</h1>
+                                <p className="about">{sign.about}</p>
+                                <h1>Motto: </h1>
+                                <p className="about">{sign.motto}</p>
+                                <h1>Secret Wish: </h1>
+                                <p className="about">{sign.secret_wish}</p>
+                                <br/>
+                            </Container>
                 
                 
-                            <Segment textAlign="center">
+                            <div className="App">
                                 <h1>Traits</h1>
 
                                 <Grid textAlign="left">
-                                    <Grid.Column width={8}>
-                                        <h3>The Good</h3>
-                                        <ul>
+                                    <Grid.Column width={4}>
+                                        <Image src={thenaughty} alt="thenaughty" />
+                                    </Grid.Column>
+
+                                    <Grid.Column width={4}>
+                                        <ul className="about">
+                                            {sign.bad_traits? 
+                                                sign.bad_traits.map((bad, index) => (
+                                                    <li key={index}>{bad}</li>
+                                                ))
+                                            :
+                                                "loading..."
+                                            }
+                                        </ul>
+                                    </Grid.Column>
+
+                                    <Grid.Column width={4}>
+                                        <Image src={thegood} alt="thegood" />
+                                    </Grid.Column>
+
+                                    <Grid.Column width={3}>
+                                        <ul className="about">
 
                                             {sign.good_traits? 
                                                 sign.good_traits.map((good, index) => (
@@ -102,33 +127,25 @@ class SignInfo extends React.Component {
                                             }
                                         </ul>
                                     </Grid.Column>
-
-                                    <Grid.Column width={8}>
-                                        <h3>The Naughty</h3>
-                                        <ul>
-                                            {sign.bad_traits? 
-                                                sign.bad_traits.map((bad, index) => (
-                                                    <li key={index}>{bad}</li>
-                                                ))
-                                            :
-                                                "loading..."
-                                            }
-                                        </ul>
-                                    </Grid.Column>
                                 </Grid>
 
-                            </Segment>
+                            </div>
 
                         </Grid.Column>
                     </Grid.Row>
 
                     <Grid.Row >
-    
-                        <Grid.Column width={8}>
 
-                            <Segment>
-                                <h3>Likes</h3>
-                                <ul>
+                        <Grid.Column width={3}>
+                            <Image src={likes} alt="likes" />
+                        </Grid.Column>
+
+                        <Grid.Column width={5}>
+
+                            <div>
+                                <br/>
+                                <br/>
+                                <ul className="about">
 
                                     {sign.likes? 
                                         sign.likes.map((like, index) => (
@@ -138,15 +155,20 @@ class SignInfo extends React.Component {
                                         "loading..."
                                     }
                                 </ul>
-                            </Segment>
+                            </div>
 
                         </Grid.Column>
 
-                        <Grid.Column width={8}>
+                        <Grid.Column width={3}>
+                            <Image src={dislikes} alt="dislikes" />
+                        </Grid.Column>
 
-                            <Segment>
-                                <h3>Dislikes</h3>
-                                <ul>
+                        <Grid.Column width={4}>
+
+                            <div>
+                                <br/>
+                                <br/>
+                                <ul className="about">
                                     {sign.dislikes? 
                                         sign.dislikes.map((dislike, index) => (
                                             <li key={index}>{dislike}</li>
@@ -155,7 +177,7 @@ class SignInfo extends React.Component {
                                         "loading..."
                                     }
                                 </ul>
-                            </Segment>
+                            </div>
 
                         </Grid.Column>
 
