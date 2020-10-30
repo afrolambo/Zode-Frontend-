@@ -15,6 +15,10 @@ class NavBar extends React.Component{
     this.setState({ activeItem: name })
   }
 
+  handleProfile = (e) => {
+    console.log(e.target)
+  }
+
   stickTopMenu = () => this.setState({menuFixed: true})
   render(props) {
 

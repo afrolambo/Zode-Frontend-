@@ -8,6 +8,7 @@ import FollowingModal from '../components/FollowingModal'
 import logo from '../PNG/logo.png'
 import signInfoL from '../PNG/signInfoL.png'
 import signInfoText from '../PNG/signInfoText.png'
+import NavBar from '../components/NavBar'
 class ControllerProfilePage extends React.Component {
 
     state = {
@@ -20,36 +21,39 @@ class ControllerProfilePage extends React.Component {
     }
     
     async componentDidMount() {
-        const token = localStorage.getItem("token")
         const id = this.props.match.params.id
+        this.getProfile(id)  
+    }
+
+    getProfile = (id) => {
+        const token = localStorage.getItem("token")
         const me = this.props.userId 
-
         if (id == me ){
-                fetch(`${HOST}/profile`, {
-                    method: "GET", 
-                    headers: { Authorization: `Bearer ${token}` }, 
-                })
-                .then(resp => resp.json())
-                .then(data => this.setState({
-                    userProfile: data.user,
-                    followers: data.user.followers_qty,
-                    bio: data.user.bio
+            fetch(`${HOST}/profile`, {
+                method: "GET", 
+                headers: { Authorization: `Bearer ${token}` }, 
+            })
+            .then(resp => resp.json())
+            .then(data => this.setState({
+                userProfile: data.user,
+                followers: data.user.followers_qty,
+                bio: data.user.bio
 
-                }))
+            }))
         } else {
-                fetch(`${HOST}/users/${id}`, {
-                method: 'GET', 
-                headers: { Authorization: `Bearer ${token}`} 
+            fetch(`${HOST}/users/${id}`, {
+            method: 'GET', 
+            headers: { Authorization: `Bearer ${token}`} 
+            })
+            .then(resp => resp.json())
+            .then(data => 
+                this.setState({
+                userProfile: data.user, 
+                followStatus: data.user.followed_by_current_user, 
+                followers: data.user.followers_qty
                 })
-                .then(resp => resp.json())
-                .then(data => 
-                    this.setState({
-                    userProfile: data.user, 
-                    followStatus: data.user.followed_by_current_user, 
-                    followers: data.user.followers_qty
-                    })
-                )
-        }    
+            )
+        }  
     }
 
     findSign = () => {
@@ -57,6 +61,10 @@ class ControllerProfilePage extends React.Component {
             let sign = this.state.signs.find(sign => sign.name === this.state.userProfile.sign)
             return sign
         } 
+    }
+
+    handleClickFollows = (id) => {
+        this.getProfile(id)   
     }
 
     toggleFollow = async (e) => {
@@ -141,13 +149,13 @@ class ControllerProfilePage extends React.Component {
                                 <Grid.Row>
                                     <Grid.Column width={8}>
                                         <div>
-                                            <h1 className="App">{followers} <FollowersModal id={id}>Followers</FollowersModal></h1>
+                                            <h1 className="App">{followers} <FollowersModal clickHandler={this.handleClickFollows} id={id}>Followers</FollowersModal></h1>
                                         </div>
                                     </Grid.Column>
 
                                     <Grid.Column width={8}>
                                         <div>
-                                            <h1 className="App">{user.following_qty} <FollowingModal id={id}>Following</FollowingModal></h1>
+                                            <h1 className="App">{user.following_qty} <FollowingModal clickHandler={this.handleClickFollows} id={id}>Following</FollowingModal></h1>
                                         </div>
                                     </Grid.Column>
                                 </Grid.Row>

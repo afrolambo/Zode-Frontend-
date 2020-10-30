@@ -1,10 +1,10 @@
 import React,{useState, useEffect} from 'react'
 import { Button, Header, Image, Modal, Segment } from 'semantic-ui-react'
 import {HOST} from '../constants'
-import UserSelect from './UserSelect'
+import FollowerSelect from './FollowerSelect'
 
 
-export default function FollowingModal({id}) {
+export default function FollowingModal({id, clickHandler}) {
     
    const [open, setOpen] = useState(false)
    const [data, setData] = useState([])
@@ -40,7 +40,7 @@ export default function FollowingModal({id}) {
                         <Modal.Description>
                         <Segment textAlign="left" style={{overflow: 'auto', maxHeight: 200}}>
                             <div className="ui middle aligned divided list">
-                            {data.map( d => <UserSelect key={d.id} user={d} />)}
+                            {data.map( d => <FollowerSelect key={d.id} user={d} clickHandler={clickHandler} />)}
                             </div>
                         </Segment>
                         </Modal.Description>

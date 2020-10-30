@@ -34,8 +34,13 @@ class SignInfo extends React.Component {
         return this.state.compatibility.map((sign, index)=> <CompatibleSigns key={index} sign={sign} clickHandler={this.clickHandler} />) 
     }
 
-   clickHandler = (e) => {
-        this.forceUpdate()
+   clickHandler = (id) => {
+    fetch(`${SUN}/${id}`)
+    .then(resp => resp.json())
+    .then(data => this.setState({
+        sign: data, 
+        compatibility: data.compatibility
+    }))
    }
     
     render() {

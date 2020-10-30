@@ -1,13 +1,13 @@
 import React,{useState, useEffect} from 'react'
 import { Button, Header, Image, Modal, Segment } from 'semantic-ui-react'
 import {HOST} from '../constants'
-import UserSelect from './UserSelect'
+import FollowerSelect from './FollowerSelect'
 
 
-export default function FollowersModal({id}) {
+export default function FollowersModal({id, clickHandler}) {
     
    const [open, setOpen] = useState(false)
-   const [data, setData] = useState([])
+   const [userData, setUserData] = useState([])
    const [loading, setLoading ] = useState(false)
 
    useEffect(() => {
@@ -19,13 +19,8 @@ export default function FollowersModal({id}) {
            }
        }).then(
            res => res.json()
-       ).then(res => setData(res))
+       ).then(res => setUserData(res))
    }, [])
-
-
-   
-
-
 
         return (
             <Modal
@@ -40,9 +35,9 @@ export default function FollowersModal({id}) {
                         <Modal.Description>
                         <Segment textAlign="left" style={{overflow: 'auto', maxHeight: 200}}>
                             <div className="ui middle aligned divided list">
-                            {data.map( d => <UserSelect key={d.id} user={d} />)}
+                            {userData.map( d => <FollowerSelect key={d.id} user={d} clickHandler={clickHandler}  />)}
                               {/* {data.length >= 1 ?
-                              return array = data.map(user => <UserSelect user={user}/>)
+                              return array = data.map(user => <FollowerSelect user={user}/>)
                               :
                               "loading"
                               } */}

@@ -10,6 +10,10 @@ class CompatibleSigns extends React.Component{
         let image = SIGN_IMAGES.find(image => image.name === this.props.sign)
        return image
     }  
+
+    handleClick = (e) => {
+        this.props.clickHandler(e.target.id)
+    }
     
     render(){
         const image = this.image()
@@ -24,7 +28,7 @@ class CompatibleSigns extends React.Component{
                         trigger={ <Link to={{
                                     pathname: `/zodiac/${image.id}`, 
                                     signId: image.id
-                                    }} onClick={this.props.clickHandler}>
+                                    }} onClick={this.handleClick}>
                                     <img  className="ui tiny circular image" src={image.img} alt={image.name} id={image.id}/> 
                                 </Link>
                         }
