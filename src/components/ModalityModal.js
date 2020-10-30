@@ -25,7 +25,7 @@ export default function ModalityModal(props) {
                         <Image size='medium' src={sign.cardinalityPic} wrapped />
                         <Modal.Description>
                             <Segment>
-                                <p>{sign.element} </p>
+                                <p>{sign.cardinality} </p>
                             </Segment>
                         </Modal.Description>
                         </Modal.Content>
