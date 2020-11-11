@@ -1,8 +1,7 @@
 import React from 'react'
-import { useHistory, withRouter } from 'react-router-dom'
-import EditForm from '../components/EditForm'
+import { withRouter } from 'react-router-dom'
 import {HOST} from '../constants'
-import { Button, Form, Grid, Segment, Row} from 'semantic-ui-react'
+import { Button, Form, Grid, Segment} from 'semantic-ui-react'
 
 
 class EditProfile extends React.Component{

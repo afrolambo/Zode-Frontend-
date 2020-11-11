@@ -14,7 +14,7 @@ import ZodiacFormContainer from './components/ZodiacFormContainer'
 import EditProfile from './containers/EditProfile'
 import './CSS/App.scss'
 
-import { Route, Switch, withRouter, Navigation } from 'react-router-dom'
+import { Route, Switch, withRouter} from 'react-router-dom'
 
 class App extends Component {
   state = {
@@ -110,8 +110,6 @@ class App extends Component {
   }
 
   render() {
-    // const {id, username} = this.state.currentUser
-   console.log(this.state.currentUser)
     
     return (
       <div>

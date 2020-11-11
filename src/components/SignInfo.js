@@ -8,7 +8,7 @@ import dislikes from '../PNG/dislikes.png'
 import thegood from '../PNG/thegood.png'
 import thenaughty from '../PNG/thenaughty.png'
 import { Link } from 'react-router-dom'
-import { Container, Button, Form, Grid, Image, Segment, Row} from 'semantic-ui-react'
+import { Container, Button, Grid, Image} from 'semantic-ui-react'
 
 import 'semantic-ui-css/semantic.min.css'
 

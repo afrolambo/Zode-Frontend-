@@ -1,7 +1,5 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import {SIGN_IMAGES} from '../constants'
-import { Container, Grid, Image, Popup, Button, Form, Header, Message, Segment, Row } from 'semantic-ui-react'
+import React from 'react'
+import { Button } from 'semantic-ui-react'
 
 
 const FollowButton = ({ children, type, onClick }) => {

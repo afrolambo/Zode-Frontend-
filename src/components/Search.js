@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Button, Form, Grid, Header, Image, Message, Segment, Row} from 'semantic-ui-react'
+import { Button, Form, Segment} from 'semantic-ui-react'
 
 class Search extends React.Component {
 

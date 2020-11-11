@@ -19,7 +19,6 @@ class Welcome extends React.Component {
     }
 
     render() {
-        console.log(this.props.user)
         const style={}
         return (
             <> 

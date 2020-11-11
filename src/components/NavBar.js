@@ -3,8 +3,6 @@ import { NavLink} from 'react-router-dom';
 import { Container, Menu, Visibility, Image } from 'semantic-ui-react'
 import icon from '../PNG/icon.png'
 
-
-
 class NavBar extends React.Component{
   state = { 
     activeItem: null, 
@@ -23,7 +21,6 @@ class NavBar extends React.Component{
   render(props) {
 
     const {activeItem} = this.state
-    console.log(this.props.id)
 
       return (
         <Container>
@@ -60,14 +57,6 @@ class NavBar extends React.Component{
                     active={activeItem === 'Explore'}
                     onClick={this.handleItemClick}
                   />
-              
-                  {/* <Menu.Item 
-                    as={NavLink} to="/conversations"
-                    name = 'Messages'
-                    active={activeItem === 'Messages'}
-                    onClick={this.handleItemClick}
-                  /> */}
-
 
                   <Menu.Item position="right"
                     as={NavLink} to={`/users/${this.props.id}`}
@@ -104,7 +93,6 @@ class NavBar extends React.Component{
 
       )
   }
-  
 }; 
 
 
