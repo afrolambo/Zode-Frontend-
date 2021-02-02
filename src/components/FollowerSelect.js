@@ -15,7 +15,8 @@ const FollowerSelect = ({user, clickHandler}) => {
             <div className="item">
                 <img className="ui avatar image" src={user.avatar} />
                 <div className="content">
-               <Link to={`/users/${user.id}`} onClick={handleClick} className="header"> {user.username} </Link>
+                    <Link to={`/users/${user.id}`} onClick={handleClick} className="header"> {user.username} </Link>
+                    <Button>Unfollow</Button>
                </div>
             </div>
 
