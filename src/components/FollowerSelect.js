@@ -16,7 +16,6 @@ const FollowerSelect = ({user, clickHandler}) => {
                 <img className="ui avatar image" src={user.avatar} />
                 <div className="content">
                     <Link to={`/users/${user.id}`} onClick={handleClick} className="header"> {user.username} </Link>
-                    
                </div>
             </div>
 

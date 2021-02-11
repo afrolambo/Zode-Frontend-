@@ -37,6 +37,7 @@ class CompatibleSigns extends React.Component{
                         position="right center"
                     />
                     : 
+                    //Place holder - find loading animation
                     "loading..."
                 }
             </>
