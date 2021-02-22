@@ -3,15 +3,15 @@ This Single Web App was built with React.js on the Frontend and Ruby on Rails in
 
 Backend is [here](https://github.com/afrolambo/Zode-Backend)
 
-# Demo Video
+### Demo Video
 
 [Short Video Demo](https://www.loom.com/share/f9056811a4fd47e9ac1e7e9a4107af9a)
 
-# Link to site
+### Link to site
 
 Link to Site coming soon 
 
-# User Story: 
+### User Story: 
 
 A user logs in/ creates an account (filling out a form to find unique zodiac sign and create unique account and password) 
 
