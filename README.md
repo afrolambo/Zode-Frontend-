@@ -1,4 +1,4 @@
-## Zodē (zo•dee)
+## Zodē (zo•dee) Frontend
 This Single Web App was built with React.js on the Frontend and Ruby on Rails in the [Backend](https://github.com/afrolambo/Zode-Backend)
 
 Backend is [here](https://github.com/afrolambo/Zode-Backend)
