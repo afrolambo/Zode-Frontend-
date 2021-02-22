@@ -1,6 +1,5 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
+## Zodē (zo•dee)
+This application was built with React on the Frontend and Rails in the [Backend](https://github.com/afrolambo/Zode-Backend)
 
 In the project directory, you can run:
 
