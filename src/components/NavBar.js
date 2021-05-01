@@ -30,7 +30,7 @@ class NavBar extends React.Component{
                 as={NavLink} 
                 to="/" 
                 name = 'ZodeIcon'
-              >
+              > 
                 <img size="huge" className="profile_image" className="icon" alt="icon" src={icon} /> 
               </Menu.Item>
 
