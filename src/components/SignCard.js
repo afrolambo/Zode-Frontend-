@@ -3,49 +3,37 @@ import 'semantic-ui-css/semantic.min.css'
 import { Link } from 'react-router-dom'
 import { Grid, Popup} from 'semantic-ui-react'
 
-
-class SignCard extends React.Component {
-
-    render() {
-        let image = this.props.sign
-        let name = this.props.sign.name
-
+export default function SignCard({ sign }) {
+    {
         const style = {
             borderRadius: 0.5,
             opacity: 0.7,
             padding: '0.5em',
           }
-
         return (
-
             <Grid.Column contentAlign="center" >
-
-                <h2>{name}:</h2>
-
+                <h2>{sign.name}:</h2>
                 <Popup
                     trigger={<Link to={{
-                                pathname: `zodiac/${image.id}`, 
+                                pathname: `zodiac/${sign.id}`, 
                                 state: {
-                                    signId: image.id
+                                    signId: sign.id
                                 }
                             }}>
                                 <div> 
                                     <img className="ui small circular image" 
-                                        src={image.img} alt={image.name} id={image.id} bordered
+                                        src={sign.img} alt={sign.name} id={sign.id} bordered
                                     />
                                 </div>
                             </Link> }
                     style={style}
                     content={` 
-                    ${image.sunDates}` 
+                    ${sign.sunDates}` 
                     }
                     size="huge"
                     position="right-center"
                 />
-
             </Grid.Column>
         )
     }
 }
-
-export default SignCard
