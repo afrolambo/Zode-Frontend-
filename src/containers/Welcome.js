@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Login from '../components/Login'
 import Signup from '../components/Signup'
 import HoroscopeContainer from './HoroscopeContainer'
@@ -7,34 +7,27 @@ import logo from '../PNG/logo.png'
 
 import { Grid, Image, Message, Segment, Button} from 'semantic-ui-react'
 
-class Welcome extends React.Component {
-    state = {
-        newUser: false
-    }
+export default function Welcome ({user, signupHandler, loginHandler}) {
+    const [newUser, setNewUser] = useState(false)
 
-    handleClick = () => {
-        this.setState({
-            newUser: !this.state.newUser
-        })
-    }
-
-    render() {
-        const style={}
+    const handleClick = () => {
+        setNewUser(!newUser)
+    } 
+    {
         return (
-            <> 
-                    
-                {this.props.user ? 
+            <>  
+                {user ? 
                     <>
                         <Grid textAlign='center' style={{ height: `100vh` }} verticalAlign="middle">
                             <Grid.Column  style={{maxWidth: 800}}>
                                 <div>
                                     <img src={logo} alt={logo}/>
                                 </div>
-                                {this.props.user.sign?
-                                    <HoroscopeContainer user={this.props.user}/>
+                                {user.sign?
+                                    <HoroscopeContainer user={user}/>
                                 :
                                 <Link to='/zodiacForm'>
-                                <Button>Find my Sign</Button>
+                                    <Button>Find my Sign</Button>
                                 </Link>
                                 }
                             </Grid.Column>
@@ -44,17 +37,17 @@ class Welcome extends React.Component {
                 :
                     <>
 
-                        {this.state.newUser ? 
+                        {newUser ? 
                             <Signup 
-                                submitHandler={this.props.signupHandler} 
-                                handleClick={this.handleClick}
+                                submitHandler={signupHandler} 
+                                handleClick={handleClick}
                             />
 
                         :
 
                             <Login 
-                                submitHandler={this.props.loginHandler} 
-                                handleClick={this.handleClick}
+                                submitHandler={loginHandler} 
+                                handleClick={handleClick}
                             />
                             
                         } 
@@ -65,5 +58,3 @@ class Welcome extends React.Component {
         )
     }
 }
-
-export default Welcome

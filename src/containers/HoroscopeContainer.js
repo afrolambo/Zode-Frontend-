@@ -2,20 +2,18 @@ import React, {Component} from 'react'
 import {HOROSCOPE} from '../constants'
 import { Segment } from 'semantic-ui-react'
 
+export default function HoroscopeContainer({ user }){
 
-class HoroscopeContainer extends Component{
+    // const findSign = () => {
+    //     HOROSCOPE.find(sign => sign.name === user.sign)
+    // }
 
-    findSign = () => {
-        HOROSCOPE.find(sign => sign.name === this.props.user.sign)
-    }
-
-    render() {
-    let mySign = this.props.user.sign
+    {
+    let mySign = user.sign
     let sign = HOROSCOPE.find(sign => sign.name === mySign)
-    console.log(sign)
         return(
             <div>
-                <h1>Hello {this.props.user.username} Welcome to Zodē</h1>
+                <h1>Hello {user.username} Welcome to Zodē</h1>
                 <h2>Here's your weekly Horoscope:</h2>
                 <Segment>
                     <Segment> <div className="horoscope">{sign.scope}</div> </Segment>
@@ -24,5 +22,3 @@ class HoroscopeContainer extends Component{
         )
     }
 }
-
-export default HoroscopeContainer
