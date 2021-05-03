@@ -34,11 +34,12 @@ class App extends Component {
         headers: { Authorization: `Bearer ${token}` }, 
       })
       .then(resp => resp.json())
-      .then(data => 
+      .then(data =>  {
+        console.log(data)
          this.setState({
         currentUser: data.user, 
         id: data.user.id
-        })
+        })}
       )
     } else {
       this.props.history.push("/")
@@ -64,6 +65,7 @@ class App extends Component {
     .then(resp => resp.json())
     .then(data => {
       localStorage.setItem("token", data.jwt)
+      console.log(data.user)
       this.setState({ 
         currentUser: data.user,
         id: data.user.id
