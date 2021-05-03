@@ -1,41 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import SignCard from '../components/SignCard'
 import {SIGN_IMAGES} from '../constants'
 import { Container, Grid, Header, Image} from 'semantic-ui-react'
 
-
-class Zodiac extends React.Component {    
-
-  state = {
-    signs: SIGN_IMAGES
-  }
-
-  listSigns = () => {
-    return this.state.signs.map(
-        (sign, index) => <SignCard 
-        key={index} sign={sign} 
-        /> )
-}
-
-  render(){
-    const signs = this.listSigns()
+export default function Zodiac({ img }){  
+  const [signs, setSigns] = useState(SIGN_IMAGES)
     
-      return (
-        <Container >
-          <br/>
+  useEffect(() => {
+    setSigns(SIGN_IMAGES)
+  })
 
-          <Header as='h2' inverted textAlign='center' >Sun Signs</Header>
-
-          <Grid style={{ height: `100vh` }} columns={4} >
-
-                {signs}
-
-          </Grid> 
-
-        </Container>
-      );
+  const listSigns = () => {
+    return signs.map((sign, index) => <SignCard key={index} sign={sign} />)
   }
-}
-  
 
-  export default Zodiac
+  const allSigns = listSigns()
+    
+    return (
+      <Container >
+        <br/>
+        <Header as='h2' inverted textAlign='center' >Sun Signs</Header>
+        <Grid style={{ height: `100vh` }} columns={4} >
+              {allSigns}
+        </Grid> 
+      </Container>
+    );
+}
