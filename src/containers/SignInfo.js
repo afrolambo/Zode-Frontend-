@@ -14,6 +14,7 @@ import { Container, Button, Grid, Image} from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 
 class SignInfo extends React.Component {
+    // export default function SignInfo
     state ={
         sign: {}, 
         compatibility: [],
