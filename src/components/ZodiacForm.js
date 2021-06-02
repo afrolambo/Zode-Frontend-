@@ -103,7 +103,7 @@ render() {
                       </div>
                       <br/>
                       <div>
-                        <h3>Birth City</h3>
+                        <h2>Birth Location `${"(City)"}` </h2>
                         <input type="text" name="birth_location" placeholder="Enter City" value={this.state.birth_location} onChange={this.changeHandler} />
                       </div>
                       <br/>
